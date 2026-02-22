@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "phoenix-prototype/1.0.0": {
+        "runtime": {
+          "phoenix-prototype.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "phoenix-prototype/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
