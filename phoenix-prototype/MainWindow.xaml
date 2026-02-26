@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:phoenix_prototype"
+        xmlns:syswin="clr-namespace:System.Windows;assembly=PresentationFramework"
         mc:Ignorable="d"
         Background="Black"
         WindowStyle="None"
@@ -14,6 +15,40 @@
         Loaded="Window_Loaded"
         MaxHeight="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Height}"
         MaxWidth="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}">
+
+    <Window.Resources>
+        <!-- Override system colors used by Menu and MenuItem -->
+        <SolidColorBrush x:Key="{x:Static SystemColors.MenuBrushKey}" Color="#222"/>
+        <SolidColorBrush x:Key="{x:Static SystemColors.MenuTextBrushKey}" Color="White"/>
+        <SolidColorBrush x:Key="{x:Static SystemColors.MenuHighlightBrushKey}" Color="#333"/>
+
+        <!-- Optional: border around dropdowns -->
+        <SolidColorBrush x:Key="{x:Static SystemColors.MenuBarBrushKey}" Color="#222"/>
+
+        <!-- Dark menu bar -->
+        <Style TargetType="Menu">
+            <Setter Property="Background" Value="#222"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!-- Dark dropdown background -->
+        <Style TargetType="ContextMenu">
+            <Setter Property="Background" Value="#222"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+
+        <!-- Dark menu items using default template -->
+        <Style TargetType="MenuItem">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#222"/>
+
+            <!-- These override the system brushes the default template uses -->
+            <Setter Property="MenuItem.Background" Value="#222"/>
+            <Setter Property="MenuItem.Foreground" Value="White"/>
+            <Setter Property="MenuItem.BorderBrush" Value="#444"/>
+        </Style>
+
+    </Window.Resources>
 
 
 
