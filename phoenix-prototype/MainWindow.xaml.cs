@@ -19,49 +19,20 @@ namespace phoenix_prototype
     /// </summary>
     public partial class MainWindow : Window
     {
-        public ObservableCollection<WatchlistEntry> Watchlist { get; set; } = new ObservableCollection<WatchlistEntry>();
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = this;
-
-
-            //var dummyData = new List<WatchlistEntry>
-            //{
-            //    new WatchlistEntry { UserId = "1", Username = "Alice", Nationality = "British", Telephone = "555-1234", Rate = 120, Location = "London" },
-            //    new WatchlistEntry { UserId = "2",  Username = "Bob", Nationality = "British", Telephone = "555-5678", Rate = 95, Location = "Manchester" },
-            //    new WatchlistEntry { UserId = "3",  Username = "Charlie", Nationality = "British",  Telephone = "555-9012", Rate = 150, Location = "Birmingham" },
-            //    new WatchlistEntry { UserId = "4",  Username = "Diana", Nationality = "British", Telephone = "555-3456", Rate = 200, Location = "Liverpool" }
-            //};
-
-            //DataGridWatchlist.ItemsSource = dummyData;
-
         }
 
-        public async Task LoadWatchlistAsync()
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            using var client = new HttpClient();
 
-            // Replace with your real API endpoint
-            string url = "http://localhost:8081/watchlist/today";
 
-            var response = await client.GetAsync(url);
-            Console.WriteLine(response.Content);
-
-            response.EnsureSuccessStatusCode();
-
-            string json = await response.Content.ReadAsStringAsync();
-            Console.WriteLine("JSON RECEIVED: " + json); // <--- IMPORTANT
-
-            var items = JsonSerializer.Deserialize<List<WatchlistEntry>>(json);
-
-            Watchlist.Clear();
-            foreach (var item in items)
-                Watchlist.Add(item);
-        }
-
-        // Make the REST call when the window opens
-        private async void Window_Loaded(object sender, RoutedEventArgs e) {
+            var workArea = SystemParameters.WorkArea; 
+            this.Left = workArea.Left; 
+            this.Top = workArea.Top; 
+            this.Width = workArea.Width; 
+            this.Height = workArea.Height;
 
             var orders = new Orders();
             orders.Owner = this; //this means that the owner of the Orders window is "Watchlist". 
@@ -69,16 +40,17 @@ namespace phoenix_prototype
             // ShowInTaskbar="False"
             orders.Show();
 
-            await LoadWatchlistAsync(); 
-        
-        
+            var watchlist = new Watchlist();
+            watchlist.Owner = this;
+            watchlist.Show();
+
+
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
 
-        /* Program the refresh button*/
-        private async void RefreshButton_Click(object sender, RoutedEventArgs e) { await LoadWatchlistAsync(); }
+
     }
 }

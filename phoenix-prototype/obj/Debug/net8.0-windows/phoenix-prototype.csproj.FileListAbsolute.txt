@@ -21,3 +21,5 @@ C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\Orders.g.cs
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\Orders.baml
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\phoenix-prototype.sourcelink.json
+C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\Watchlist.g.cs
+C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\Watchlist.baml
