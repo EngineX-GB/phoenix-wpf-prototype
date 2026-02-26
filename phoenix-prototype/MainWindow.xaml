@@ -17,35 +17,69 @@
         MaxWidth="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}">
 
     <Window.Resources>
-        <!-- Override system colors used by Menu and MenuItem -->
-        <SolidColorBrush x:Key="{x:Static SystemColors.MenuBrushKey}" Color="#222"/>
-        <SolidColorBrush x:Key="{x:Static SystemColors.MenuTextBrushKey}" Color="White"/>
-        <SolidColorBrush x:Key="{x:Static SystemColors.MenuHighlightBrushKey}" Color="#333"/>
-
-        <!-- Optional: border around dropdowns -->
-        <SolidColorBrush x:Key="{x:Static SystemColors.MenuBarBrushKey}" Color="#222"/>
-
-        <!-- Dark menu bar -->
+        <!-- Dark Menu Bar -->
         <Style TargetType="Menu">
             <Setter Property="Background" Value="#222"/>
             <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
         </Style>
 
-        <!-- Dark dropdown background -->
-        <Style TargetType="ContextMenu">
-            <Setter Property="Background" Value="#222"/>
-            <Setter Property="Foreground" Value="White"/>
-        </Style>
-
-        <!-- Dark menu items using default template -->
+        <!-- Dark MenuItem -->
         <Style TargetType="MenuItem">
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="#222"/>
+            <Setter Property="BorderBrush" Value="#222"/>
+            <Setter Property="BorderThickness" Value="0"/>
 
-            <!-- These override the system brushes the default template uses -->
-            <Setter Property="MenuItem.Background" Value="#222"/>
-            <Setter Property="MenuItem.Foreground" Value="White"/>
-            <Setter Property="MenuItem.BorderBrush" Value="#444"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="MenuItem">
+                        <Grid>
+                            <!-- Header -->
+                            <Border x:Name="Border"
+                                Background="{TemplateBinding Background}"
+                                Padding="6,3">
+                                <ContentPresenter ContentSource="Header"/>
+                            </Border>
+
+                            <!-- REQUIRED: Popup for dropdown items -->
+                            <Popup x:Name="PART_Popup"
+                               Placement="Bottom"
+                               AllowsTransparency="True"
+                               Focusable="False"
+                               IsOpen="{TemplateBinding IsSubmenuOpen}">
+                                <Border Background="#222"
+                                    BorderBrush="Gray"
+                                    BorderThickness="1"
+                                    Padding="2"
+                                    Width="200">
+                                    <Border.Effect>
+                                        <DropShadowEffect Color="Gray"
+                                              BlurRadius="12"
+                                              ShadowDepth="2"
+                                              Opacity="0.6"/>
+                                    </Border.Effect>
+                                    <StackPanel IsItemsHost="True"/>
+                                </Border>
+                            </Popup>
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+
+                            <!-- Hover -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#333"/>
+                            </Trigger>
+
+                            <!-- Dropdown open -->
+                            <Trigger Property="IsSubmenuOpen" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#444"/>
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
         </Style>
 
     </Window.Resources>
@@ -98,6 +132,7 @@
                 <MenuItem Header="New"/>
                 <MenuItem Header="Open"/>
                 <MenuItem Header="Exit"/>
+
             </MenuItem>
 
             <MenuItem Header="View">
