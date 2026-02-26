@@ -34,15 +34,15 @@ namespace phoenix_prototype
             this.Width = workArea.Width; 
             this.Height = workArea.Height;
 
-            var orders = new Orders();
-            orders.Owner = this; //this means that the owner of the Orders window is "Watchlist". 
-            // add this snippet to the orders.xaml code:
-            // ShowInTaskbar="False"
-            orders.Show();
+            //var orders = new Orders();
+            //orders.Owner = this; //this means that the owner of the Orders window is "Watchlist". 
+            //// add this snippet to the orders.xaml code:
+            //// ShowInTaskbar="False"
+            //orders.Show();
 
-            var watchlist = new Watchlist();
-            watchlist.Owner = this;
-            watchlist.Show();
+            //var watchlist = new Watchlist();
+            //watchlist.Owner = this;
+            //watchlist.Show();
 
 
         }
@@ -50,6 +50,21 @@ namespace phoenix_prototype
         private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
+
+        private void Watchlist_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new Watchlist();   // Watchlist.xaml → class Watchlist
+            window.Owner = this;            // Optional: keeps it tied to main window
+            window.Show();                  // or ShowDialog() if you want modal
+        }
+
+        private void Orders_Click(object sender, RoutedEventArgs e)
+        {
+            var window = new Orders();
+            window.Owner = this;
+            window.Show();
+        }
+
 
 
     }

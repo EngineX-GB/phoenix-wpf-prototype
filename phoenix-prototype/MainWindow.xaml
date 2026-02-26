@@ -39,7 +39,7 @@
                             <Border x:Name="Border"
                                 Background="{TemplateBinding Background}"
                                 Padding="6,3">
-                                <ContentPresenter ContentSource="Header"/>
+                                <ContentPresenter x:Name="HeaderPresenter" ContentSource="Header" Margin="0,0,0,0" />
                             </Border>
 
                             <Popup x:Name="PART_Popup"
@@ -68,6 +68,11 @@
                         </Grid>
 
                         <ControlTemplate.Triggers>
+
+                            <Trigger Property="Role" Value="SubmenuItem">
+                                <Setter TargetName="HeaderPresenter" Property="Margin" Value="22,0,0,0"/>
+                            </Trigger>
+
 
                             <!-- Hover -->
                             <Trigger Property="IsMouseOver" Value="True">
@@ -161,8 +166,8 @@
             <MenuItem Header="View">
                 <MenuItem Header="Refresh"/>
                 <Separator />
-                <MenuItem Header="Watchlist"/>
-                <MenuItem Header="Orders" />
+                <MenuItem Header="Watchlist" Click="Watchlist_Click"/>
+                <MenuItem Header="Orders" Click="Orders_Click"/>
                 <MenuItem Header="Listings" />
             </MenuItem>
 
