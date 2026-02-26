@@ -8,16 +8,20 @@
         Background="Black"
         WindowStyle="None"
         ResizeMode="CanResize"
-        WindowState="Normal"
+        WindowState="Maximized"
         Title="Phoenix Client Platform"
         ShowInTaskbar="True"
         Loaded="Window_Loaded"
-        Height="300" Width="400">
+        MaxHeight="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Height}"
+        MaxWidth="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}">
+
+
+
     <DockPanel>
         <!-- Custom Title Bar -->
         <Border DockPanel.Dock="Top"
                 Background="Black"
-                Height="20"
+                Height="25"
                 MouseDown="TitleBar_MouseDown">
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -26,17 +30,19 @@
                 </Grid.ColumnDefinitions>
 
                 <!-- Title -->
-                <TextBlock Text="Watchlist"
+                <TextBlock Text="Phoenix Client Platform"
                            VerticalAlignment="Center"
-                           Margin="10,0,0,0"
+                           Margin="5,0,0,0"
                            Foreground="White"
-                           FontSize="10"/>
+                           FontSize="12"
+                           FontFamily="Microsoft Sans Serif" 
+                           FontWeight="Bold"/>
 
                 <!-- Close Button -->
                 <Button Grid.Column="1"
                         Content="⨯"
                         Width="40"
-                        Background="Black"
+                        Background="Red"
                         Foreground="White"
                         BorderBrush="Transparent"
                         FontWeight="Bold"
@@ -48,6 +54,24 @@
 
             </Grid>
         </Border>
+        <!-- Menu Bar -->
+        <Menu DockPanel.Dock="Top"
+          Background="#222"
+          Foreground="White"
+          Height="25">
+            <MenuItem Header="File">
+                <MenuItem Header="New"/>
+                <MenuItem Header="Open"/>
+                <MenuItem Header="Exit"/>
+            </MenuItem>
+
+            <MenuItem Header="View">
+                <MenuItem Header="Refresh"/>
+            </MenuItem>
+
+            <MenuItem Header="Help"/>
+        </Menu>
+
         <!-- Main Content -->
         <Grid Background="#111">
             <!-- Your UI goes here -->
