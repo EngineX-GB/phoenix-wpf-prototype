@@ -21,8 +21,8 @@ namespace phoenix_prototype
         [JsonPropertyName("telephone")]
         public string Telephone { get; set; }
         
-        [JsonPropertyName("rate")]
-        public int Rate { get; set; }
+        [JsonPropertyName("price")]
+        public int Price { get; set; }
         
         [JsonPropertyName("location")]
         public string Location { get; set; }
