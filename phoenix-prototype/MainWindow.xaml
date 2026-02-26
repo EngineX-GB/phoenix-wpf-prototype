@@ -42,26 +42,29 @@
                                 <ContentPresenter ContentSource="Header"/>
                             </Border>
 
-                            <!-- REQUIRED: Popup for dropdown items -->
                             <Popup x:Name="PART_Popup"
                                Placement="Bottom"
                                AllowsTransparency="True"
                                Focusable="False"
-                               IsOpen="{TemplateBinding IsSubmenuOpen}">
-                                <Border Background="#222"
-                                    BorderBrush="Gray"
-                                    BorderThickness="1"
-                                    Padding="2"
-                                    Width="200">
+                               IsOpen="{TemplateBinding IsSubmenuOpen}">        
+                                <Border Background="Transparent" Padding="4">
                                     <Border.Effect>
-                                        <DropShadowEffect Color="Gray"
-                                              BlurRadius="12"
-                                              ShadowDepth="2"
-                                              Opacity="0.6"/>
+                                        <DropShadowEffect Color="Black"
+                                          BlurRadius="14"
+                                          ShadowDepth="2"
+                                          Opacity="0.6"/>
                                     </Border.Effect>
-                                    <StackPanel IsItemsHost="True"/>
+
+                                    <Border Background="#222"
+                                        BorderBrush="Gray"
+                                        BorderThickness="1"
+                                        Padding="2"
+                                        Width="200">
+                                        <StackPanel IsItemsHost="True"/>
+                                    </Border>
                                 </Border>
                             </Popup>
+
                         </Grid>
 
                         <ControlTemplate.Triggers>
@@ -81,6 +84,26 @@
                 </Setter.Value>
             </Setter>
         </Style>
+
+
+        <Style TargetType="Separator">
+            <Setter Property="Margin" Value="4,2"/>
+            <Setter Property="Height" Value="1"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Separator">
+                        <Border Background="White"
+                        Height="1"
+                        HorizontalAlignment="Stretch"
+                        Margin="12,4,4,4"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
 
     </Window.Resources>
 
@@ -137,6 +160,10 @@
 
             <MenuItem Header="View">
                 <MenuItem Header="Refresh"/>
+                <Separator />
+                <MenuItem Header="Watchlist"/>
+                <MenuItem Header="Orders" />
+                <MenuItem Header="Listings" />
             </MenuItem>
 
             <MenuItem Header="Help"/>
