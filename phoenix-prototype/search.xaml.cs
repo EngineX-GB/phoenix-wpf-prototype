@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,24 +22,45 @@ namespace phoenix_prototype
     /// </summary>
     public partial class search : Window
     {
+
+        public ObservableCollection<SearchEntry> searchEntries { get; set; } = new ObservableCollection<SearchEntry>();
         public search()
         {
             InitializeComponent();
+            DataContext = this;
         }
 
         // Make the REST call when the window opens
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-            //var orders = new Orders();
-            //orders.Owner = this; //this means that the owner of the Orders window is "Watchlist". 
-            //// add this snippet to the orders.xaml code:
-            //// ShowInTaskbar="False"
-            //orders.Show();
-
-
+            await LoadAllOrdersAsync();
 
         }
+
+
+        public async Task LoadAllOrdersAsync()
+        {
+            using var client = new HttpClient();
+
+            // Replace with your real API endpoint
+            string url = "http://localhost:8081/search?nationality=Romanian";
+
+            var response = await client.GetAsync(url);
+            Console.WriteLine(response.Content);
+
+            response.EnsureSuccessStatusCode();
+
+            string json = await response.Content.ReadAsStringAsync();
+
+            var items = JsonSerializer.Deserialize<List<SearchEntry>>(json);
+
+            searchEntries.Clear();
+            foreach (var item in items)
+                searchEntries.Add(item);
+        }
+
+
+
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
