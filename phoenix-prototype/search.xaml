@@ -126,7 +126,8 @@
           IsReadOnly="True"
           HorizontalAlignment="Left"
           ScrollViewer.HorizontalScrollBarVisibility="Auto"
-          ScrollViewer.CanContentScroll="True">
+          ScrollViewer.CanContentScroll="True"
+          FrozenColumnCount="2">
 
 
 
