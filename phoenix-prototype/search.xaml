@@ -160,6 +160,11 @@
                     <!-- right padding -->
                     <Setter Property="Foreground" Value="White"/>
                 </Style>
+
+
+
+
+
             </DataGrid.Resources>
 
             <!-- this is needed to double override the colour for selecting a row - default is blue, but set it to grey-->
@@ -211,21 +216,21 @@
 
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="Auto" />
-                <DataGridTextColumn Header="Nationality" Binding="{Binding Nationality}" Width="SizeToHeader" />
-                <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="SizeToHeader"  />
-                <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" Width="SizeToHeader" />
-                <DataGridTextColumn Header="Telephone" Binding="{Binding Telephone}" Width="SizeToHeader"   />
-                <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="SizeToHeader" />
-                <DataGridTextColumn Header="r100" Binding="{Binding r100}" Width="SizeToHeader" />
-                <DataGridTextColumn Header="r150" Binding="{Binding r150}" Width="SizeToHeader" />
-                <DataGridTextColumn Header="r200" Binding="{Binding r200}" Width="SizeToHeader"/>
-                <DataGridTextColumn Header="Height" Binding="{Binding Height}" Width="SizeToHeader" />
-                <DataGridTextColumn Header="Min Charge" Binding="{Binding MinimumCharge}" Width="SizeToHeader" />
-                <DataGridTextColumn Header="Max Charge" Binding="{Binding MaximumCharge}" Width="SizeToHeader" />
-                <DataGridTextColumn Header="Days in Service" Binding="{Binding NumberOfDaysInService}" Width="SizeToHeader"/>
-                <DataGridTextColumn Header="% Availability" Binding="{Binding PercentageAvailable}" Width="SizeToHeader" />
-                <DataGridTextColumn Header="Regions Travelled" Binding="{Binding TotalRegionsTravelled}" Width="SizeToHeader"/>
-                <DataGridTextColumn Header="History of BB" Binding="{Binding PreviouslyServicedBB}" Width="*" />
+                <DataGridTextColumn Header="Nationality" Binding="{Binding Nationality}" Width="Auto" />
+                <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="Auto"  />
+                <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" Width="Auto" />
+                <DataGridTextColumn Header="Telephone" Binding="{Binding Telephone}" Width="Auto"   />
+                <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="Auto" />
+                <DataGridTextColumn Header="r100" Binding="{Binding R100}" Width="Auto" />
+                <DataGridTextColumn Header="r150" Binding="{Binding R150}" Width="Auto" />
+                <DataGridTextColumn Header="r200" Binding="{Binding R200}" Width="Auto"/>
+                <DataGridTextColumn Header="Height" Binding="{Binding Height}" Width="Auto" />
+                <DataGridTextColumn Header="Min Charge" Binding="{Binding MinimumCharge}" Width="Auto" />
+                <DataGridTextColumn Header="Max Charge" Binding="{Binding MaximumCharge}" Width="Auto" />
+                <DataGridTextColumn Header="Days in Service" Binding="{Binding NumberOfDaysInService}" Width="Auto"/>
+                <DataGridTextColumn Header="% Availability" Binding="{Binding PercentageAvailable}" Width="Auto" />
+                <DataGridTextColumn Header="Regions Travelled" Binding="{Binding TotalRegionsTravelled}" Width="Auto"/>
+                <DataGridTextColumn Header="History of BB" Binding="{Binding PreviouslyServicedBB}" Width="Auto" />
             </DataGrid.Columns>
         </DataGrid>
     </DockPanel>
