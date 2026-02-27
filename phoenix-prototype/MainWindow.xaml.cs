@@ -44,6 +44,10 @@ namespace phoenix_prototype
             //watchlist.Owner = this;
             //watchlist.Show();
 
+            var search = new search();
+            search.Owner = this;
+            search.Show();
+
 
         }
 
