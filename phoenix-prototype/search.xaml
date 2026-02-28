@@ -12,6 +12,11 @@
         Loaded="Window_Loaded"
         Title="Search" Height="450" Width="800">
 
+    <Window.Resources>
+        <local:AvailabilityToBrushConverter x:Key="AvailabilityToBrushConverter" />
+    </Window.Resources>
+
+
     <DockPanel>
 
         <!-- Custom Title Bar -->
@@ -108,11 +113,36 @@
                 </Style>
             </Border.Resources>
             <StackPanel Orientation="Horizontal">
-                <Button Content="⟳" Style="{StaticResource DarkButton}" ToolTip="Refresh" Click="RefreshButton_Click"/>
-                <Button Content="⨯" Style="{StaticResource DarkButton}" ToolTip="Remove"/>
+                <Button Content="✉︎" Style="{StaticResource DarkButton}" ToolTip="Send Mail" Click="RefreshButton_Click"/>
+                <Button Content="∞" Style="{StaticResource DarkButton}" ToolTip="Link Clients"/>
+               
             </StackPanel>
         </Border>
 
+
+        <!-- Second Toolbar Row -->
+        <Border DockPanel.Dock="Top" Background="#1A1A1A" Padding="2">
+            <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
+                <TextBox Width="120" Background="#242424" Foreground="DarkGray" Margin="0,0,5,0" Text="Username" FontSize="10"/>
+                <TextBox Name="SearchBox" Text="UserID" 
+                                 Background="#242424"
+                                 Foreground="DarkGray"
+                                 FontSize="10"
+                                 Width="100" Margin="0.5,0.5,0.5,0.5"/>
+                <TextBox Name="Nationality" Text="Nationality" 
+                                 Background="#242424"
+                                 Foreground="DarkGray"
+                                 FontSize="10"
+                                 Width="100" Margin="0.5,0.5,0.5,0.5"/>
+                <TextBox Name="Region" Text="Region" 
+                                 Background="#242424"
+                                 Foreground="DarkGray"
+                                 FontSize="10"
+                                 Width="100" Margin="0.5,0.5,0.5,0.5"/>
+                <Button Content=" Search " Background="DarkGray" Margin="5,0,5,0" Padding="1" ToolTip="Search"/>
+                <Button Content=" Reset " Background="DarkGray" ToolTip="Reset"/>
+            </StackPanel>
+        </Border>
 
         <DataGrid x:Name="DataGridSearch" 
           ItemsSource="{Binding searchEntries}"
@@ -229,7 +259,21 @@
                 <DataGridTextColumn Header="Min Charge" Binding="{Binding MinimumCharge}" Width="Auto" />
                 <DataGridTextColumn Header="Max Charge" Binding="{Binding MaximumCharge}" Width="Auto" />
                 <DataGridTextColumn Header="Days in Service" Binding="{Binding NumberOfDaysInService}" Width="Auto"/>
-                <DataGridTextColumn Header="% Availability" Binding="{Binding PercentageAvailable}" Width="Auto" />
+
+                <DataGridTextColumn Header="% Availability" Binding="{Binding PercentageAvailable}" Width="Auto">
+                    <DataGridTextColumn.CellStyle>
+                        <Style TargetType="DataGridCell">
+                            <Setter Property="Background"
+                    Value="{Binding PercentageAvailable, Converter={StaticResource AvailabilityToBrushConverter}}"/>
+
+                            <!-- Default text colour; you can refine this later -->
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                    </DataGridTextColumn.CellStyle>
+                </DataGridTextColumn>
+
+
+
                 <DataGridTextColumn Header="Regions Travelled" Binding="{Binding TotalRegionsTravelled}" Width="Auto"/>
                 <DataGridTextColumn Header="History of BB" Binding="{Binding PreviouslyServicedBB}" Width="Auto" />
             </DataGrid.Columns>

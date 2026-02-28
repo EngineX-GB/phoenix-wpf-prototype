@@ -25,3 +25,4 @@ C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\Watchlist.baml
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\search.g.cs
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\search.baml
+C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\GeneratedInternalTypeHelper.g.cs
