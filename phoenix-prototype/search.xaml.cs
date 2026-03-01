@@ -69,6 +69,16 @@ namespace phoenix_prototype
         /* Program the refresh button*/
         private async void RefreshButton_Click(object sender, RoutedEventArgs e) { }
 
+        private void ResetButton_Click(object sender, RoutedEventArgs e)
+        {
+            Username.Text = "";
+            UserID.Text = "";      // This is your UserID field
+            Nationality.Text = "";
+            Region.Text = "";
+            Keyboard.ClearFocus();
+        }
+
+
 
     }
 }
