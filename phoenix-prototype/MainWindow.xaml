@@ -117,14 +117,19 @@
     <DockPanel>
         <!-- Custom Title Bar -->
         <Border DockPanel.Dock="Top"
-                Background="Black"
+                Background="#333"
                 Height="25"
                 MouseDown="TitleBar_MouseDown">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
-                    <ColumnDefinition Width="Auto" />
+                    <!-- Title -->
+                    <ColumnDefinition Width="40" />
+                    <!-- Minimise -->
+                    <ColumnDefinition Width="40" />
+                    <!-- Close -->
                 </Grid.ColumnDefinitions>
+
 
                 <!-- Title -->
                 <TextBlock Text="Phoenix Client Platform"
@@ -132,11 +137,25 @@
                            Margin="5,0,0,0"
                            Foreground="White"
                            FontSize="12"
-                           FontFamily="Microsoft Sans Serif" 
-                           FontWeight="Bold"/>
+                           FontFamily="Microsoft Sans Serif" />
+
+
+                <!-- Minimise Button -->
+                <Button Grid.Column="1"
+                        Content="▁"
+                        Width="40"
+                        Background="#222"
+                        Foreground="White"
+                        BorderBrush="Transparent"
+                        FontWeight="Bold"
+                        Click="MinimiseButton_Click"
+                        Padding="0"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center" />
+
 
                 <!-- Close Button -->
-                <Button Grid.Column="1"
+                <Button Grid.Column="2"
                         Content="⨯"
                         Width="40"
                         Background="Red"

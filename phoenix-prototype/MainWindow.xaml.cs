@@ -69,6 +69,10 @@ namespace phoenix_prototype
             window.Show();
         }
 
+        private void MinimiseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
 
 
     }
