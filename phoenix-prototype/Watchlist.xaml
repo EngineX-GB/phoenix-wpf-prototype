@@ -118,6 +118,22 @@
             </StackPanel>
         </Border>
 
+        <!-- Status Bar -->
+        <Border DockPanel.Dock="Bottom"
+            Background="#222"
+            Height="22"
+            BorderThickness="0">
+            <Grid>
+                <TextBlock x:Name="StatusText"
+                   Text="Ready"
+                   VerticalAlignment="Center"
+                   Margin="8,0,0,0"
+                   Foreground="White"
+                   FontSize="10"/>
+            </Grid>
+        </Border>
+
+
         <DataGrid x:Name="DataGridWatchlist" 
           ItemsSource="{Binding WatchlistCollection}"
           AutoGenerateColumns="False"

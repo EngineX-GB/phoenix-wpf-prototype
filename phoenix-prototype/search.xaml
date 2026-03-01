@@ -161,7 +161,7 @@
             <StackPanel Orientation="Horizontal">
                 <Button Content="✉︎" Style="{StaticResource DarkButton}" ToolTip="Send Mail"/>
                 <Button Content="∞" Style="{StaticResource DarkButton}" ToolTip="Link Clients"/>
-               
+                <Button Content="✚" Style="{StaticResource DarkButton}" ToolTip="Add to Watchlist"/>
             </StackPanel>
         </Border>
 
