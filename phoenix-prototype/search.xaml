@@ -139,8 +139,9 @@
                                  Foreground="DarkGray"
                                  FontSize="10"
                                  Width="100" Margin="0.5,0.5,0.5,0.5"/>
-                <Button Content=" Search " Background="DarkGray" Margin="5,0,5,0" Padding="1" ToolTip="Search"/>
-                <Button Content=" Reset " Background="DarkGray" ToolTip="Reset"/>
+                <Button Content=" Search " Background="DarkGray" Margin="5,0,5,0" Padding="1" ToolTip="Search" Width="50"/>
+                <Button Content=" Reset " Background="DarkGray" ToolTip="Reset" Width="50"/>
+                <Button Content=" Buy " Background="LightGreen" ToolTip="Place a Buy Order" Width="50"/>
             </StackPanel>
         </Border>
 
