@@ -59,6 +59,38 @@ namespace phoenix_prototype
                 searchEntries.Add(item);
         }
 
+        public async Task RunSearchQueryAsync()
+        {
+            var parameters = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(Username.Text))
+                parameters.Add($"username={Username.Text}");
+
+            if (!string.IsNullOrWhiteSpace(UserID.Text))
+                parameters.Add($"userId={UserID.Text}");
+
+            if (!string.IsNullOrWhiteSpace(Nationality.Text))
+                parameters.Add($"nationality={Nationality.Text}");
+
+            if (!string.IsNullOrWhiteSpace(Region.Text))
+                parameters.Add($"region={Region.Text}");
+
+            string queryParams = string.Join("&", parameters);
+
+            using var client = new HttpClient();
+
+            string url = "http://localhost:8081/search?" + queryParams;
+
+            var response = await client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+
+            string json = await response.Content.ReadAsStringAsync();
+            var items = JsonSerializer.Deserialize<List<SearchEntry>>(json);
+
+            searchEntries.Clear();
+            foreach (var item in items)
+                searchEntries.Add(item);
+        }
 
 
 
@@ -67,7 +99,9 @@ namespace phoenix_prototype
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
 
         /* Program the refresh button*/
-        private async void RefreshButton_Click(object sender, RoutedEventArgs e) { }
+        private async void RunSearchQuery_Click(object sender, RoutedEventArgs e) {
+            await RunSearchQueryAsync();
+        }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
