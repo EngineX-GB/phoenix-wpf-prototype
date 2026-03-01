@@ -193,6 +193,7 @@
             <MenuItem Header="Help"/>
         </Menu>
 
+
         <!-- Main Content -->
         <Grid Background="#111">
             <!-- Your UI goes here -->

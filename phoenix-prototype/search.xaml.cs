@@ -34,29 +34,44 @@ namespace phoenix_prototype
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await LoadAllOrdersAsync();
-
         }
 
 
         public async Task LoadAllOrdersAsync()
         {
-            using var client = new HttpClient();
+            StatusText.Text = "Querying data...";
 
-            // Replace with your real API endpoint
-            string url = "http://localhost:8081/search?nationality=British";
+            try
+            {
+                using var client = new HttpClient();
 
-            var response = await client.GetAsync(url);
-            Console.WriteLine(response.Content);
+                // Replace with your real API endpoint
+                string url = "http://localhost:8081/search?nationality=British";
 
-            response.EnsureSuccessStatusCode();
+                var response = await client.GetAsync(url);
+                Console.WriteLine(response.Content);
 
-            string json = await response.Content.ReadAsStringAsync();
+                response.EnsureSuccessStatusCode();
 
-            var items = JsonSerializer.Deserialize<List<SearchEntry>>(json);
+                string json = await response.Content.ReadAsStringAsync();
 
-            searchEntries.Clear();
-            foreach (var item in items)
-                searchEntries.Add(item);
+                var items = JsonSerializer.Deserialize<List<SearchEntry>>(json);
+
+                searchEntries.Clear();
+                foreach (var item in items)
+                    searchEntries.Add(item);
+                StatusText.Text = "Received " + searchEntries.Count + " client(s)";
+            }
+            catch (HttpRequestException hre)
+            {
+                Console.WriteLine(hre.Message);
+                StatusText.Text = "Error: Unable to connect to the Client Service";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                StatusText.Text = "Error: An unexpected error has occurred. " + ex.Message;
+            }
         }
 
         public async Task RunSearchQueryAsync()
@@ -77,19 +92,36 @@ namespace phoenix_prototype
 
             string queryParams = string.Join("&", parameters);
 
-            using var client = new HttpClient();
+            StatusText.Text = "Querying data...";
 
-            string url = "http://localhost:8081/search?" + queryParams;
+            try
+            {
 
-            var response = await client.GetAsync(url);
-            response.EnsureSuccessStatusCode();
+                using var client = new HttpClient();
 
-            string json = await response.Content.ReadAsStringAsync();
-            var items = JsonSerializer.Deserialize<List<SearchEntry>>(json);
+                string url = "http://localhost:8081/search?" + queryParams;
 
-            searchEntries.Clear();
-            foreach (var item in items)
-                searchEntries.Add(item);
+                var response = await client.GetAsync(url);
+                response.EnsureSuccessStatusCode();
+
+                string json = await response.Content.ReadAsStringAsync();
+                var items = JsonSerializer.Deserialize<List<SearchEntry>>(json);
+
+                searchEntries.Clear();
+                foreach (var item in items)
+                    searchEntries.Add(item);
+                StatusText.Text = "Received " + searchEntries.Count + " client(s)";
+            }
+            catch (HttpRequestException hre)
+            {
+                Console.WriteLine(hre.Message);
+                StatusText.Text = "Error: Unable to connect to the Client Service";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                StatusText.Text = "Error: An unexpected error has occurred. " + ex.Message;
+            }
         }
 
 
@@ -105,6 +137,7 @@ namespace phoenix_prototype
 
         private void ResetButton_Click(object sender, RoutedEventArgs e)
         {
+            StatusText.Text = "Ready";
             Username.Text = "";
             UserID.Text = "";      // This is your UserID field
             Nationality.Text = "";
