@@ -112,6 +112,14 @@ namespace phoenix_prototype
             Keyboard.ClearFocus();
         }
 
+        private async void SearchField_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                await RunSearchQueryAsync();
+            }
+        }
+
 
 
     }

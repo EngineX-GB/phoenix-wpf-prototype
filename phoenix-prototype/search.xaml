@@ -172,6 +172,7 @@
                 <TextBox Width="120" Name="Username"
                      Style="{StaticResource WatermarkTextBox}"
                      Tag="Username"
+                     KeyDown="SearchField_KeyDown"
                      FontSize="10"
                      Margin="0,0,5,0"/>
                 <TextBox Width="100"
@@ -179,19 +180,22 @@
                          Style="{StaticResource WatermarkTextBox}"
                          Tag="UserID"
                          FontSize="10"
-                         Margin="0.5"/>
+                         Margin="0.5"
+                         KeyDown="SearchField_KeyDown"/>
                 <TextBox Width="100"
                          Name="Nationality"
                          Style="{StaticResource WatermarkTextBox}"
                          Tag="Nationality"
                          FontSize="10"
-                         Margin="0.5"/>
+                         Margin="0.5"
+                         KeyDown="SearchField_KeyDown"/>
                 <TextBox Width="100"
                          Name="Region"
                          Style="{StaticResource WatermarkTextBox}"
                          Tag="Region"
                          FontSize="10"
-                         Margin="0.5"/>
+                         Margin="0.5"
+                         KeyDown="SearchField_KeyDown"/>
                 <Button Content=" Search " Background="DarkGray" Margin="5,0,5,0" Padding="1" ToolTip="Search" Width="50" Click="RunSearchQuery_Click"/>
                 <Button Content=" Reset " Background="DarkGray" ToolTip="Reset" Width="50" Click="ResetButton_Click"/>
                 <Button Content=" Buy " Background="LightGreen" ToolTip="Place a Buy Order" Width="50"/>
