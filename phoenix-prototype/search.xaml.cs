@@ -43,7 +43,7 @@ namespace phoenix_prototype
             using var client = new HttpClient();
 
             // Replace with your real API endpoint
-            string url = "http://localhost:8081/search?nationality=Romanian";
+            string url = "http://localhost:8081/search?nationality=British";
 
             var response = await client.GetAsync(url);
             Console.WriteLine(response.Content);
