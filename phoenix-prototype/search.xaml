@@ -14,6 +14,52 @@
 
     <Window.Resources>
         <local:AvailabilityToBrushConverter x:Key="AvailabilityToBrushConverter" />
+        <Style x:Key="WatermarkTextBox" TargetType="TextBox">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#242424"/>
+            <Setter Property="Padding" Value="3"/>
+            <Setter Property="BorderBrush" Value="White"/>
+            <Setter Property="BorderThickness" Value="1"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="2">
+
+                            <Grid>
+                                <!-- Actual text -->
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+
+                                <!-- Placeholder -->
+                                <TextBlock x:Name="Watermark"
+                                   Text="{TemplateBinding Tag}"
+                                   Foreground="DarkGray"
+                                   Margin="4,2,0,0"
+                                   IsHitTestVisible="False"
+                                   Visibility="Collapsed"/>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="Text" Value=""/>
+                                    <Condition Property="IsKeyboardFocused" Value="False"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Watermark" Property="Visibility" Value="Visible"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
     </Window.Resources>
 
 
@@ -123,22 +169,26 @@
         <!-- Second Toolbar Row -->
         <Border DockPanel.Dock="Top" Background="#1A1A1A" Padding="2">
             <StackPanel Orientation="Horizontal" Margin="0,2,0,0">
-                <TextBox Width="120" Background="#242424" Foreground="DarkGray" Margin="0,0,5,0" Text="Username" FontSize="10"/>
-                <TextBox Name="SearchBox" Text="UserID" 
-                                 Background="#242424"
-                                 Foreground="DarkGray"
-                                 FontSize="10"
-                                 Width="100" Margin="0.5,0.5,0.5,0.5"/>
-                <TextBox Name="Nationality" Text="Nationality" 
-                                 Background="#242424"
-                                 Foreground="DarkGray"
-                                 FontSize="10"
-                                 Width="100" Margin="0.5,0.5,0.5,0.5"/>
-                <TextBox Name="Region" Text="Region" 
-                                 Background="#242424"
-                                 Foreground="DarkGray"
-                                 FontSize="10"
-                                 Width="100" Margin="0.5,0.5,0.5,0.5"/>
+                <TextBox Width="120"
+         Style="{StaticResource WatermarkTextBox}"
+         Tag="Username"
+         FontSize="10"
+         Margin="0,0,5,0"/>
+                <TextBox Width="100"
+         Style="{StaticResource WatermarkTextBox}"
+         Tag="UserID"
+         FontSize="10"
+         Margin="0.5"/>
+                <TextBox Width="100"
+         Style="{StaticResource WatermarkTextBox}"
+         Tag="Nationality"
+         FontSize="10"
+         Margin="0.5"/>
+                <TextBox Width="100"
+         Style="{StaticResource WatermarkTextBox}"
+         Tag="Region"
+         FontSize="10"
+         Margin="0.5"/>
                 <Button Content=" Search " Background="DarkGray" Margin="5,0,5,0" Padding="1" ToolTip="Search" Width="50"/>
                 <Button Content=" Reset " Background="DarkGray" ToolTip="Reset" Width="50"/>
                 <Button Content=" Buy " Background="LightGreen" ToolTip="Place a Buy Order" Width="50"/>
