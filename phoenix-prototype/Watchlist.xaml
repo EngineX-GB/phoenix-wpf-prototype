@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:phoenix_prototype"
         mc:Ignorable="d"
-        Background="Black"
+        Background="#1A1A1A"
         WindowStyle="None"
         Title="Watchlist"
         ShowInTaskbar="True"
@@ -137,7 +137,7 @@
         <DataGrid x:Name="DataGridWatchlist" 
           ItemsSource="{Binding WatchlistCollection}"
           AutoGenerateColumns="False"
-          Background="Black"
+          Background="#1A1A1A"
           Foreground="White"
           GridLinesVisibility="None"
           HeadersVisibility="Column"
@@ -150,7 +150,7 @@
             <DataGrid.Resources>
                 <!-- Dark ScrollBar Style -->
                 <Style TargetType="ScrollBar">
-                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Background" Value="#1A1A1A"/>
                     <!-- Track background -->
                     <Setter Property="Foreground" Value="White"/>
                     <Setter Property="BorderBrush" Value="Black"/>
@@ -158,7 +158,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ScrollBar">
-                                <Grid Background="Black">
+                                <Grid Background="#1A1A1A">
                                     <Track Name="PART_Track"
                                IsDirectionReversed="True">
                                         <Track.Thumb>
@@ -183,7 +183,7 @@
             <!-- this is needed to double override the colour for selecting a row - default is blue, but set it to grey-->
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
-                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Background" Value="#1A1A1A"/>
                     <Setter Property="Foreground" Value="White"/>
 
                     <Style.Triggers>
