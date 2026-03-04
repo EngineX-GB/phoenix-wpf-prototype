@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:phoenix_prototype"
         mc:Ignorable="d"
-        Background="Black"
+        Background="#222"
         WindowStyle="None"
         ShowInTaskbar="True"
         ResizeMode="CanResize"
@@ -222,7 +222,7 @@
         <DataGrid x:Name="DataGridSearch" 
           ItemsSource="{Binding searchEntries}"
           AutoGenerateColumns="False"
-          Background="Black"
+          Background="#1A1A1A"
           Foreground="White"
           GridLinesVisibility="None"
           HeadersVisibility="Column"
@@ -239,7 +239,7 @@
             <DataGrid.Resources>
                 <!-- Dark ScrollBar Style -->
                 <Style TargetType="ScrollBar">
-                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Background" Value="#1A1A1A"/>
                     <!-- Track background -->
                     <Setter Property="Foreground" Value="White"/>
                     <Setter Property="BorderBrush" Value="Black"/>
@@ -247,7 +247,7 @@
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="ScrollBar">
-                                <Grid Background="Black">
+                                <Grid Background="#1A1A1A">
                                     <Track Name="PART_Track"
                                IsDirectionReversed="True">
                                         <Track.Thumb>
@@ -305,7 +305,7 @@
             <!-- Row Style -->
             <DataGrid.RowStyle>
                 <Style TargetType="DataGridRow">
-                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Background" Value="#1A1A1A"/>
                     <Setter Property="Foreground" Value="White"/>
                     <Setter Property="BorderBrush" Value="#333"/>
                     <Setter Property="BorderThickness" Value="0,0,0,1"/>
