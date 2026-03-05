@@ -194,6 +194,71 @@
         </Menu>
 
 
+        <!-- Custom Toolbar -->
+        <Border DockPanel.Dock="Top" Background="#222222" Padding="2" BorderBrush="#111" BorderThickness="0.5">
+            <Border.Resources>
+                <Style TargetType="Button" x:Key="DarkButton">
+                    <Setter Property="Background" Value="Black"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="BorderBrush" Value="#444"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Padding" Value="3,3"/>
+                    <Setter Property="Margin" Value="0,0,1,0"/>
+
+                    <!-- Fixed size -->
+                    <Setter Property="Width" Value="25"/>
+                    <Setter Property="Height" Value="25"/>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+
+                                <ControlTemplate.Triggers>
+                                    <!-- Hover -->
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#444"/>
+                                    </Trigger>
+
+                                    <!-- Pressed -->
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#555"/>
+                                    </Trigger>
+
+                                    <!-- Disabled -->
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter TargetName="border" Property="Background" Value="#333"/>
+                                        <Setter Property="Foreground" Value="#777"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+
+                    <Style.Triggers>
+                        <!-- Hover effect -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#555555"/>
+                        </Trigger>
+                    </Style.Triggers>
+
+
+                </Style>
+            </Border.Resources>
+            <StackPanel Orientation="Horizontal">
+                <Button Content="✚" Style="{StaticResource DarkButton}" ToolTip="View Orders"/>
+                <Button Content="🔍" Style="{StaticResource DarkButton}" ToolTip="View Search Listings"/>
+                <Button Content="👁" Style="{StaticResource DarkButton}" ToolTip="View Watchlist"/>
+                <Button Content="📰" Style="{StaticResource DarkButton}" ToolTip="View News and Reports"/>
+
+
+
+            </StackPanel>
+        </Border>
+
         <!-- Main Content -->
         <Grid Background="#111">
             <!-- Your UI goes here -->

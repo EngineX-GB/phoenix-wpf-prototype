@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Background="#222"
         WindowStyle="None"
-        ShowInTaskbar="True"
+        ShowInTaskbar="False"
         ResizeMode="CanResize"
         Loaded="Window_Loaded"
         Title="Search" Height="450" Width="800">

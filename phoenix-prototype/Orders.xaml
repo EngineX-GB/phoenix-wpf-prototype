@@ -108,6 +108,7 @@
                 <Button Content="⨯" Style="{StaticResource DarkButton}" ToolTip="Cancel Order" Click="CancelOrder_Click"/>
                 <Button Content="✔︎" Style="{StaticResource DarkButton}" ToolTip="Mark as Executed"/>
                 <Button Content="⟳" Style="{StaticResource DarkButton}" ToolTip="Refresh" Click="RefreshButton_Click"/>
+                <Button Content="⬇" Style="{StaticResource DarkButton}" ToolTip="Import Order Data" Click="RefreshButton_Click"/>
             </StackPanel>
         </Border>
 
