@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.Win32;
 using System.Collections.ObjectModel;
-using System.Linq;
+using System.IO;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace phoenix_prototype
@@ -96,6 +88,47 @@ namespace phoenix_prototype
                 }
             }
         }
+
+
+        private async void ImportOrders_Click(object sender, RoutedEventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                Title = "Select file to import",
+                Filter = "All files (*.*)|*.*"
+            };
+
+            if (dialog.ShowDialog() == true)
+            {
+                string filePath = dialog.FileName;
+
+                try
+                {
+                    await UploadFileAsync(filePath);
+                    await LoadAllOrdersAsync();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Upload failed: " + ex.Message);
+                }
+            }
+        }
+
+        private async Task UploadFileAsync(string filePath)
+        {
+            using var client = new HttpClient();
+            using var form = new MultipartFormDataContent();
+
+            var fileBytes = await File.ReadAllBytesAsync(filePath);
+            var fileContent = new ByteArrayContent(fileBytes);
+
+            // IMPORTANT: "myFile" must match your server's expected field name
+            form.Add(fileContent, "file", System.IO.Path.GetFileName(filePath));
+
+            var response = await client.PostAsync("http://localhost:8081/orders/import", form);
+            response.EnsureSuccessStatusCode();
+        }
+
 
 
     }
