@@ -188,6 +188,7 @@
                 <MenuItem Header="Watchlist" Click="Watchlist_Click"/>
                 <MenuItem Header="Orders" Click="Orders_Click"/>
                 <MenuItem Header="Listings" />
+                <MenuItem Header="News" Click="News_Click" />
             </MenuItem>
 
             <MenuItem Header="Help"/>
