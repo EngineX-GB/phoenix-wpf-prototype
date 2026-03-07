@@ -217,10 +217,10 @@
                      FontSize="10"
                      Margin="0,0,5,0"/>
                 <Button Content="Search" Style="{StaticResource DarkButton}" Width="30" FontSize="8" Margin="0,0,5,0" ToolTip="Search" Click="SearchButton_Click"/>
-                <Button Content="|◀◀" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate from the start" />
-                <Button Content="◀" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate from the start"/>
+                <Button Content="|◀◀" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate from the start" Click="NavigateToFirstPageResults_Click"/>
+                <Button Content="◀" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate Backwards" Click="NavigatePreviousPageResults_Click"/>
                 <Button Content="▶" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate Forward" Click="NavigateNextPageResults_Click"/>
-                <Button Content="▶▶|" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate Forward"/>
+                <Button Content="▶▶|" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate to the end"/>
 
             </StackPanel>
         </Border>

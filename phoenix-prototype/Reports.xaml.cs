@@ -64,6 +64,20 @@ namespace phoenix_prototype
             await LoadFeedbackAsync(UserID.Text, "FORWARD");
         }
 
+        public async void NavigateToFirstPageResults_Click(object sender, RoutedEventArgs e)
+        {
+            await LoadFeedbackAsync(UserID.Text, null);
+        }
+
+        /**
+         * TODO: 2026-03-07: This needs to be further investigated as it doesn't appear to work correctly.
+         */
+        public async void NavigatePreviousPageResults_Click(object sender, RoutedEventArgs e)
+        {
+            await LoadFeedbackAsync(UserID.Text, "BACKWARD");
+        }
+
+
         public async Task LoadFeedbackAsync(string userId, string direction)
         {
             string url = null;
@@ -73,9 +87,15 @@ namespace phoenix_prototype
             {
                 url = "http://localhost:8081/feedback?userId=" + userId;
             }
-            else
+            else if (direction == "FORWARD")
             {
                 var feedbackEntry = FeedbackEntries[^1];    // get the last entry in the collection that is currently viewing (before getting the next batch)
+                int offsetId = feedbackEntry.Oid;
+                url = "http://localhost:8081/feedback?userId=" + userId + "&pageDirection=" + direction + "&offset=" + offsetId.ToString();
+            }
+            else
+            {
+                var feedbackEntry = FeedbackEntries.First();
                 int offsetId = feedbackEntry.Oid;
                 url = "http://localhost:8081/feedback?userId=" + userId + "&pageDirection=" + direction + "&offset=" + offsetId.ToString();
             }
