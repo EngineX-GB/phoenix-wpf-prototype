@@ -327,7 +327,27 @@
 
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Rating Date" Binding="{Binding RatingDate}" Width="100" />
-                            <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" Width="100"  />
+                            <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" Width="100">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Rating}" Value="UNKNOWN">
+                                                <Setter Property="Foreground" Value="DarkGray"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Rating}" Value="NEGATIVE">
+                                                <Setter Property="Foreground" Value="Red"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Rating}" Value="POSITIVE">
+                                                <Setter Property="Foreground" Value="GreenYellow"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding Rating}" Value="NEUTRAL">
+                                                <Setter Property="Foreground" Value="DarkGray"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
                             <DataGridTextColumn Header="Feedback" Binding="{Binding Feedback}" Width="*"  />
                         </DataGrid.Columns>
                     </DataGrid>
@@ -417,8 +437,28 @@
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Meet Date" Binding="{Binding MeetDate}" Width="100" />
-                                <DataGridTextColumn Header="Rating" Binding="{Binding ReportRating}" Width="100"  />
-                                <DataGridTextColumn Header="Headline" Binding="{Binding Headline}" Width="*"  />
+                            <DataGridTextColumn Header="Rating" Binding="{Binding ReportRating}" Width="100">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding ReportRating}" Value="NONE">
+                                                <Setter Property="Foreground" Value="DarkGray"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ReportRating}" Value="NEGATIVE">
+                                                <Setter Property="Foreground" Value="Red"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ReportRating}" Value="POSITIVE">
+                                                <Setter Property="Foreground" Value="GreenYellow"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding ReportRating}" Value="NEUTRAL">
+                                                <Setter Property="Foreground" Value="DarkGray"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn Header="Headline" Binding="{Binding Headline}" Width="*"  />
                             </DataGrid.Columns>
                         </DataGrid>
 
