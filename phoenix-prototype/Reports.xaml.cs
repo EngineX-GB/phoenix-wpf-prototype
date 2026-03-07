@@ -1,20 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
 using System.Net.Http;
-using System.Security.Policy;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+
 
 namespace phoenix_prototype
 {
@@ -24,6 +13,7 @@ namespace phoenix_prototype
     public partial class Reports : Window
     {
         public ObservableCollection<FeedbackEntry> FeedbackEntries { get; set; } = new ObservableCollection<FeedbackEntry>();
+        public ObservableCollection<ServiceReportHeadlineEntry> ServiceReportHeadlineEntries{ get; set; } = new ObservableCollection<ServiceReportHeadlineEntry>();
 
         public Reports()
         {
@@ -54,6 +44,7 @@ namespace phoenix_prototype
             if (UserID.Text != "")
             {
                 await LoadFeedbackAsync(UserID.Text, null);
+                await LoadServiceReportsAsync(UserID.Text);
             }
         }
 
@@ -101,13 +92,22 @@ namespace phoenix_prototype
             FeedbackEntries.Clear();
             foreach (var item in items.entries)
                 FeedbackEntries.Add(item);
+        }
 
+        public async Task LoadServiceReportsAsync(string userId)
+        {
+            string url = null;
+            using var client = new HttpClient();
+            url = "http://localhost:8081/servicereports?userId=" + userId;
+            var response = await client.GetAsync(url);
+            Console.WriteLine(response.Content);
+            response.EnsureSuccessStatusCode();
+            string json = await response.Content.ReadAsStringAsync();
+            var items = JsonSerializer.Deserialize<List<ServiceReportHeadlineEntry>>(json);
 
-            Console.WriteLine("Test");
-
-
-
-            //TODO: This needs to be completed - 07/03/26
+            ServiceReportHeadlineEntries.Clear();
+            foreach (var item in items)
+                ServiceReportHeadlineEntries.Add(item);
         }
 
     }

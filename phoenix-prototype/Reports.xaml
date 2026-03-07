@@ -111,11 +111,6 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
-
-
-
-
     </Window.Resources>
 
 
@@ -339,14 +334,94 @@
                 </TabItem>
 
                 <TabItem Header="Service Reports">
-                    <StackPanel Margin="10">
-                        <TextBlock Text="Settings go here"/>
-                        <Button Content="Save"/>
-                    </StackPanel>
-                </TabItem>
+                    <DataGrid x:Name="DataGridServiceReports" 
+                         ItemsSource="{Binding ServiceReportHeadlineEntries}"
+                         AutoGenerateColumns="False"
+                         Background="#1A1A1A"
+                         Foreground="White"
+                         GridLinesVisibility="None"
+                         HeadersVisibility="Column"
+                         BorderBrush="#444"
+                         BorderThickness="1"
+                         IsReadOnly="True">
 
-                <TabItem Header="UKP Ratings">
-                    <TextBlock Text="About this app" Margin="10"/>
+                            <DataGrid.Resources>
+                                <!-- Dark ScrollBar Style -->
+                                <Style TargetType="ScrollBar">
+                                    <Setter Property="Background" Value="#1A1A1A"/>
+                                    <!-- Track background -->
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="BorderBrush" Value="Black"/>
+
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="ScrollBar">
+                                                <Grid Background="#1A1A1A">
+                                                    <Track Name="PART_Track" IsDirectionReversed="True">
+                                                        <Track.Thumb>
+                                                            <Thumb Background="Black" BorderBrush="Black" BorderThickness="0.5"/>
+                                                        </Track.Thumb>
+                                                    </Track>
+                                                </Grid>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </DataGrid.Resources>
+
+                            <!-- this is needed to double override the colour for selecting a row - default is blue, but set it to grey-->
+                            <DataGrid.CellStyle>
+                                <Style TargetType="DataGridCell">
+                                    <Setter Property="Background" Value="#1A1A1A"/>
+                                    <Setter Property="Foreground" Value="White"/>
+
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#333333"/>
+                                            <!-- Selected cell color -->
+                                            <Setter Property="Foreground" Value="White"/>
+                                            <Setter Property="BorderBrush" Value="#777777"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.CellStyle>
+
+                            <!-- Header Style -->
+                            <DataGrid.ColumnHeaderStyle>
+                                <Style TargetType="DataGridColumnHeader">
+                                    <Setter Property="Background" Value="Black"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="BorderBrush" Value="#444"/>
+                                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                    <Setter Property="FontSize" Value="10"/>
+                                </Style>
+                            </DataGrid.ColumnHeaderStyle>
+
+                            <!-- Row Style -->
+                            <DataGrid.RowStyle>
+                                <Style TargetType="DataGridRow">
+                                    <Setter Property="Background" Value="Black"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                    <Setter Property="BorderBrush" Value="#333"/>
+                                    <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                    <Setter Property="FontSize" Value="10"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter Property="Background" Value="#333333"/>
+                                            <!-- Dark grey -->
+                                            <Setter Property="Foreground" Value="White"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </DataGrid.RowStyle>
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="Meet Date" Binding="{Binding MeetDate}" Width="100" />
+                                <DataGridTextColumn Header="Rating" Binding="{Binding ReportRating}" Width="100"  />
+                                <DataGridTextColumn Header="Headline" Binding="{Binding Headline}" Width="*"  />
+                            </DataGrid.Columns>
+                        </DataGrid>
+
                 </TabItem>
             </TabControl>
         </Grid>
