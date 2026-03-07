@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
+using System.Security.Policy;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -19,9 +23,12 @@ namespace phoenix_prototype
     /// </summary>
     public partial class Reports : Window
     {
+        public ObservableCollection<FeedbackEntry> FeedbackEntries { get; set; } = new ObservableCollection<FeedbackEntry>();
+
         public Reports()
         {
             InitializeComponent();
+            DataContext = this;
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
@@ -42,17 +49,65 @@ namespace phoenix_prototype
 
         private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
 
-        /* Program the refresh button*/
-        private async void RefreshButton_Click(object sender, RoutedEventArgs e) { 
-            //await LoadWatchlistAsync();
+        /* Program the search button*/
+        private async void SearchButton_Click(object sender, RoutedEventArgs e) { 
+            if (UserID.Text != "")
+            {
+                await LoadFeedbackAsync(UserID.Text, null);
+            }
         }
 
         private async void SearchField_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                //Here, you can run the query, using the await /async function. To be programmed.
+                if (UserID.Text != "")
+                {
+                    await LoadFeedbackAsync(UserID.Text, null);
+                }
             }
+        }
+
+        public async void NavigateNextPageResults_Click(object sender, RoutedEventArgs e)
+        {
+            await LoadFeedbackAsync(UserID.Text, "FORWARD");
+        }
+
+        public async Task LoadFeedbackAsync(string userId, string direction)
+        {
+            string url = null;
+            using var client = new HttpClient();
+
+            if (direction == null)
+            {
+                url = "http://localhost:8081/feedback?userId=" + userId;
+            }
+            else
+            {
+                var feedbackEntry = FeedbackEntries[^1];    // get the last entry in the collection that is currently viewing (before getting the next batch)
+                int offsetId = feedbackEntry.Oid;
+                url = "http://localhost:8081/feedback?userId=" + userId + "&pageDirection=" + direction + "&offset=" + offsetId.ToString();
+            }
+
+            var response = await client.GetAsync(url);
+            Console.WriteLine(response.Content);
+
+            response.EnsureSuccessStatusCode();
+
+            string json = await response.Content.ReadAsStringAsync();
+
+            var items = JsonSerializer.Deserialize<FeedbackResponse>(json);
+
+            FeedbackEntries.Clear();
+            foreach (var item in items.entries)
+                FeedbackEntries.Add(item);
+
+
+            Console.WriteLine("Test");
+
+
+
+            //TODO: This needs to be completed - 07/03/26
         }
 
     }

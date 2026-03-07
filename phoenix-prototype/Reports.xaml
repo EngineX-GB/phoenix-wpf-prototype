@@ -59,10 +59,63 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
-        
-        
-        
+
+
+        <Style TargetType="TabControl">
+            <Setter Property="Background" Value="#1A1A1A"/>
+            <Setter Property="BorderBrush" Value="#333"/>
+        </Style>
+
+        <Style TargetType="TabItem">
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#2A2A2A"/>
+            <Setter Property="BorderBrush" Value="#444"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="Margin" Value="0,0,2,0"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="Border"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="1"
+                        CornerRadius="3"
+                        Padding="6,3">
+                            <!-- This shows the tab HEADER -->
+                            <ContentPresenter
+                        ContentSource="Header"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"/>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <!-- Selected tab -->
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#3A3A3A"/>
+                                <Setter TargetName="Border" Property="BorderBrush" Value="#666"/>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Trigger>
+
+                            <!-- Hover -->
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="#444"/>
+                            </Trigger>
+
+                            <!-- Disabled -->
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Foreground" Value="#777"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+
+
+
     </Window.Resources>
 
 
@@ -162,17 +215,17 @@
                 </Style>
             </Border.Resources>
             <StackPanel Orientation="Horizontal">
-                <TextBox Width="120" Name="Username"
+                <TextBox Width="120" Name="UserID"
                      Style="{StaticResource WatermarkTextBox}"
-                     Tag="Username"
+                     Tag="User ID"
                      KeyDown="SearchField_KeyDown"
                      FontSize="10"
                      Margin="0,0,5,0"/>
-                <Button Content="Search" Style="{StaticResource DarkButton}" Width="30" FontSize="8" Margin="0,0,5,0" ToolTip="Search" Click="RefreshButton_Click"/>
-                <Button Content="|◀◀" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate from the start" Click="RefreshButton_Click"/>
-                <Button Content="◀" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate from the start" Click="RefreshButton_Click"/>
-                <Button Content="▶" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate Forward" Click="RefreshButton_Click"/>
-                <Button Content="▶▶|" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate Forward" Click="RefreshButton_Click"/>
+                <Button Content="Search" Style="{StaticResource DarkButton}" Width="30" FontSize="8" Margin="0,0,5,0" ToolTip="Search" Click="SearchButton_Click"/>
+                <Button Content="|◀◀" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate from the start" />
+                <Button Content="◀" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate from the start"/>
+                <Button Content="▶" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate Forward" Click="NavigateNextPageResults_Click"/>
+                <Button Content="▶▶|" Style="{StaticResource DarkButton}" FontSize="8" ToolTip="Navigate Forward"/>
 
             </StackPanel>
         </Border>
@@ -193,18 +246,106 @@
         </Border>
         <Grid>
             <TabControl>
-                <TabItem Header="Home">
-                    <TextBlock Text="Welcome to the Home tab" Margin="10"/>
+                <TabItem Header="Feedback">
+
+                    <DataGrid x:Name="DataGridWatchlist" 
+                          ItemsSource="{Binding FeedbackEntries}"
+                          AutoGenerateColumns="False"
+                          Background="#1A1A1A"
+                          Foreground="White"
+                          GridLinesVisibility="None"
+                          HeadersVisibility="Column"
+                          BorderBrush="#444"
+                          BorderThickness="1"
+                          IsReadOnly="True">
+
+                        <DataGrid.Resources>
+                            <!-- Dark ScrollBar Style -->
+                            <Style TargetType="ScrollBar">
+                                <Setter Property="Background" Value="#1A1A1A"/>
+                                <!-- Track background -->
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="BorderBrush" Value="Black"/>
+
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ScrollBar">
+                                            <Grid Background="#1A1A1A">
+                                                <Track Name="PART_Track"
+                               IsDirectionReversed="True">
+                                                    <Track.Thumb>
+                                                        <Thumb Background="Black" BorderBrush="Black" BorderThickness="0.5"/>
+                                                    </Track.Thumb>
+                                                </Track>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </DataGrid.Resources>
+
+                        <!-- this is needed to double override the colour for selecting a row - default is blue, but set it to grey-->
+                        <DataGrid.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="Background" Value="#1A1A1A"/>
+                                <Setter Property="Foreground" Value="White"/>
+
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#333333"/>
+                                        <!-- Selected cell color -->
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="BorderBrush" Value="#777777"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.CellStyle>
+
+                        <!-- Header Style -->
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="Black"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="BorderBrush" Value="#444"/>
+                                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                <Setter Property="FontSize" Value="10"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+
+                        <!-- Row Style -->
+                        <DataGrid.RowStyle>
+                            <Style TargetType="DataGridRow">
+                                <Setter Property="Background" Value="Black"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="BorderBrush" Value="#333"/>
+                                <Setter Property="BorderThickness" Value="0,0,0,1"/>
+                                <Setter Property="FontSize" Value="10"/>
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="#333333"/>
+                                        <!-- Dark grey -->
+                                        <Setter Property="Foreground" Value="White"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataGrid.RowStyle>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Rating Date" Binding="{Binding RatingDate}" Width="100" />
+                            <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" Width="100"  />
+                            <DataGridTextColumn Header="Feedback" Binding="{Binding Feedback}" Width="*"  />
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
 
-                <TabItem Header="Settings">
+                <TabItem Header="Service Reports">
                     <StackPanel Margin="10">
                         <TextBlock Text="Settings go here"/>
                         <Button Content="Save"/>
                     </StackPanel>
                 </TabItem>
 
-                <TabItem Header="About">
+                <TabItem Header="UKP Ratings">
                     <TextBlock Text="About this app" Margin="10"/>
                 </TabItem>
             </TabControl>
