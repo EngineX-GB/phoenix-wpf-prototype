@@ -8,7 +8,7 @@
         Background="#1A1A1A"
         WindowStyle="None"
         Title="Orders"
-        ShowInTaskbar="True"
+        ShowInTaskbar="False"
         Loaded="Window_Loaded"
         ResizeMode="CanResize">
 
