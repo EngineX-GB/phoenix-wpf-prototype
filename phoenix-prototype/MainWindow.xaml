@@ -5,16 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:phoenix_prototype"
         xmlns:syswin="clr-namespace:System.Windows;assembly=PresentationFramework"
+        xmlns:shell="clr-namespace:System.Windows.Shell;assembly=PresentationFramework"
+
         mc:Ignorable="d"
         Background="Black"
         WindowStyle="None"
         ResizeMode="CanResize"
-        WindowState="Maximized"
+
         Title="Phoenix Client Platform"
         ShowInTaskbar="True"
         Loaded="Window_Loaded"
         MaxHeight="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Height}"
         MaxWidth="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Width}">
+
+
+    <WindowChrome.WindowChrome>
+        <shell:WindowChrome
+            CaptionHeight="0"
+            ResizeBorderThickness="6"
+            GlassFrameThickness="0"
+            CornerRadius="0"
+            UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
+
 
     <Window.Resources>
         <!-- Dark Menu Bar -->
