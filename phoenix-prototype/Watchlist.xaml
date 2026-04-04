@@ -194,7 +194,7 @@
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="Background" Value="#1A1A1A"/>
-                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Foreground" Value="LightGray"/>
 
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">

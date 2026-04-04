@@ -196,7 +196,17 @@
 
 
         <!-- Custom Toolbar -->
-        <Border DockPanel.Dock="Top" Background="#222222" Padding="2" BorderBrush="#111" BorderThickness="0.5">
+        <Border DockPanel.Dock="Top" Padding="2" BorderBrush="#111" BorderThickness="0.5">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#444444" Offset="0" />
+                    <!-- Grey -->
+                    <GradientStop Color="#000000" Offset="1" />
+                    <!-- Black -->
+                </LinearGradientBrush>
+            </Border.Background>
+
+
             <Border.Resources>
                 <Style TargetType="Button" x:Key="DarkButton">
                     <Setter Property="Background" Value="Black"/>
@@ -254,6 +264,9 @@
                 <Button Content="🔍" Style="{StaticResource DarkButton}" ToolTip="View Search Listings"/>
                 <Button Content="👁" Style="{StaticResource DarkButton}" ToolTip="View Watchlist"/>
                 <Button Content="📰" Style="{StaticResource DarkButton}" ToolTip="View News and Reports"/>
+                <Button Content="💹" Style="{StaticResource DarkButton}" ToolTip="Market Connector Status"/>
+
+                
 
 
 
