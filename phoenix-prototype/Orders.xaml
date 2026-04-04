@@ -62,8 +62,8 @@
         <Border DockPanel.Dock="Top" Background="#222222" Padding="2">
             <Border.Resources>
                 <Style TargetType="Button" x:Key="DarkButton">
-                    <Setter Property="Background" Value="Black"/>
-                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="Lightgray"/>
                     <Setter Property="BorderBrush" Value="#444"/>
                     <Setter Property="BorderThickness" Value="1"/>
                     <Setter Property="Padding" Value="3,3"/>
