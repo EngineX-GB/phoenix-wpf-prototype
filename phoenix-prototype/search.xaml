@@ -65,38 +65,41 @@
 
     <DockPanel>
 
-        <!-- Custom Title Bar -->
         <Border DockPanel.Dock="Top"
-                Background="Black"
-                Height="20"
-                MouseDown="TitleBar_MouseDown">
+        Height="20"
+        MouseDown="TitleBar_MouseDown">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#444444" Offset="0" />
+                    <!-- Grey -->
+                    <GradientStop Color="#000000" Offset="1" />
+                    <!-- Black -->
+                </LinearGradientBrush>
+            </Border.Background>
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <!-- Title -->
                 <TextBlock Text="Search Listings"
-                           VerticalAlignment="Center"
-                           Margin="10,0,0,0"
-                           Foreground="White"
-                           FontSize="10"/>
+                   VerticalAlignment="Center"
+                   Margin="10,0,0,0"
+                   Foreground="White"
+                   FontSize="10"/>
 
-                <!-- Close Button -->
                 <Button Grid.Column="1"
-                        Content="⨯"
-                        Width="40"
-                        Background="Black"
-                        Foreground="White"
-                        BorderBrush="Transparent"
-                        FontWeight="Bold"
-                        Click="CloseButton_Click"
-                        Padding="0"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        />
-
+                Content="⨯"
+                Width="40"
+                Background="Transparent"
+                Foreground="White"
+                BorderBrush="Transparent"
+                FontWeight="Bold"
+                Click="CloseButton_Click"
+                Padding="0"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"/>
             </Grid>
         </Border>
 

@@ -17,9 +17,18 @@
 
         <!-- Custom Title Bar -->
         <Border DockPanel.Dock="Top"
-                Background="Black"
                 Height="20"
                 MouseDown="TitleBar_MouseDown">
+
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="#444444" Offset="0" />
+                    <!-- Grey -->
+                    <GradientStop Color="#000000" Offset="1" />
+                    <!-- Black -->
+                </LinearGradientBrush>
+            </Border.Background>
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
