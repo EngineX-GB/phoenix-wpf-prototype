@@ -338,7 +338,15 @@
                 <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" Width="Auto" />
                 <DataGridTextColumn Header="Telephone" Binding="{Binding Telephone}" Width="Auto"   />
                 <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="Auto" />
-                <DataGridTextColumn Header="r100" Binding="{Binding R100}" Width="Auto" />
+                <!--DataGridTextColumn Header="r100" Binding="{Binding R100}" Width="Auto" / -->
+                <DataGridTextColumn Header="r100" Binding="{Binding R100Display}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="Foreground" Value="{Binding R100Color}" />
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
                 <DataGridTextColumn Header="%chg 100" Binding="{Binding D100}" Width="Auto" />
                 <DataGridTextColumn Header="r150" Binding="{Binding R150}" Width="Auto" />
                 <DataGridTextColumn Header="r200" Binding="{Binding R200}" Width="Auto"/>

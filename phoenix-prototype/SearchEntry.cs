@@ -1,14 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media;
 
 namespace phoenix_prototype
 {
-    public class SearchEntry
+
+
+    public class SearchEntry : INotifyPropertyChanged
     {
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private static readonly System.Timers.Timer BlinkTimer;
+        private static bool BlinkState = false;
+
+        static SearchEntry()
+        {
+            BlinkTimer = new System.Timers.Timer(3000); // 10 seconds
+            BlinkTimer.Elapsed += (s, e) =>
+            {
+                BlinkState = !BlinkState;
+                BlinkStateChanged?.Invoke();
+            };
+            BlinkTimer.Start();
+        }
+
+        private static event Action BlinkStateChanged;
+
+        public SearchEntry()
+        {
+            BlinkStateChanged += () =>
+            {
+                OnPropertyChanged(nameof(R100Display));
+                OnPropertyChanged(nameof(R100Color));
+            };
+
+        }
+
+        protected void OnPropertyChanged(string prop)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            });
+        }
+
+
+
+
 
         [JsonPropertyName("username")]
         public string Username { get; set; }
@@ -49,5 +95,26 @@ namespace phoenix_prototype
         
         [JsonPropertyName("previouslyServicedBB")]
         public bool PreviouslyServicedBB { get; set; }
+
+        // Computed property used by the DataGrid
+        public int R100Display => (D100 != 0 && BlinkState) ? D100 : R100;
+
+        // Colour logic for both R100 and D100
+        [JsonIgnore]
+        public Brush R100Color
+        {
+            get
+            {
+                if (D100 < 0)
+                    return Brushes.LimeGreen;   // negative → green
+
+                if (D100 > 0)
+                    return Brushes.Red;         // positive → red
+
+                return Brushes.White;           // zero → normal
+            }
+        }
+
+
     }
 }
