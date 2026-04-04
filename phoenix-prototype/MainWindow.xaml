@@ -258,15 +258,67 @@
 
 
                 </Style>
+
+
+                <!-- Used for showing statuses on the toolbar - e.g. connectivity to the market, ingestion service, etc.-->
+                <!-- It's similar to the DarkButton theme -->
+                <Style TargetType="Button" x:Key="DarkStatusButton">
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="Aqua"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
+                    <Setter Property="BorderThickness" Value="1"/>
+                    <Setter Property="Padding" Value="3,5"/>
+                    <Setter Property="Margin" Value="0,0,5,0"/>
+
+                    <!-- Fixed size -->
+                    <Setter Property="Width" Value="50"/>
+                    <Setter Property="Height" Value="25"/>
+
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="3">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+
+                                <ControlTemplate.Triggers>
+                                    <!-- Hover -->
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#444"/>
+                                    </Trigger>
+
+                                    <!-- Pressed -->
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#555"/>
+                                    </Trigger>
+
+                                    <!-- Disabled -->
+                                    <Trigger Property="IsEnabled" Value="False">
+                                        <Setter TargetName="border" Property="Background" Value="#333"/>
+                                        <Setter Property="Foreground" Value="#777"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+
+
+                    <Style.Triggers>
+                        <!-- Hover effect -->
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#555555"/>
+                        </Trigger>
+                    </Style.Triggers>
+
+                </Style>
             </Border.Resources>
             <StackPanel Orientation="Horizontal">
                 <Button Content="✚" Style="{StaticResource DarkButton}" ToolTip="View Orders"/>
                 <Button Content="🔍" Style="{StaticResource DarkButton}" ToolTip="View Search Listings"/>
                 <Button Content="👁" Style="{StaticResource DarkButton}" ToolTip="View Watchlist"/>
                 <Button Content="📰" Style="{StaticResource DarkButton}" ToolTip="View News and Reports"/>
-
-
-
+                <Button Content="Market" Style="{StaticResource DarkStatusButton}" ToolTip="Market Connector Status" IsEnabled="True" />
+                <Button Content="Ingestion" Style="{StaticResource DarkStatusButton}" ToolTip="Market Connector Status" IsEnabled="True"/>
             </StackPanel>
         </Border>
 
