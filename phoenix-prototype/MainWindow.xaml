@@ -209,9 +209,9 @@
 
             <Border.Resources>
                 <Style TargetType="Button" x:Key="DarkButton">
-                    <Setter Property="Background" Value="Black"/>
-                    <Setter Property="Foreground" Value="White"/>
-                    <Setter Property="BorderBrush" Value="#444"/>
+                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Foreground" Value="LightGray"/>
+                    <Setter Property="BorderBrush" Value="Transparent"/>
                     <Setter Property="BorderThickness" Value="1"/>
                     <Setter Property="Padding" Value="3,3"/>
                     <Setter Property="Margin" Value="0,0,1,0"/>
@@ -264,9 +264,6 @@
                 <Button Content="🔍" Style="{StaticResource DarkButton}" ToolTip="View Search Listings"/>
                 <Button Content="👁" Style="{StaticResource DarkButton}" ToolTip="View Watchlist"/>
                 <Button Content="📰" Style="{StaticResource DarkButton}" ToolTip="View News and Reports"/>
-                <Button Content="💹" Style="{StaticResource DarkButton}" ToolTip="Market Connector Status"/>
-
-                
 
 
 
