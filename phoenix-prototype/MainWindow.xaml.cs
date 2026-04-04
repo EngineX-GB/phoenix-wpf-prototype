@@ -11,6 +11,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Net.Http;
 using System.Text.Json;
+using System.Diagnostics;
+using System.CodeDom;
 
 namespace phoenix_prototype
 {
@@ -19,6 +21,12 @@ namespace phoenix_prototype
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private Window windowWatchlist;
+        private Window windowOrders;
+        private Window windowNews;
+        private Window windowSearch;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -26,30 +34,73 @@ namespace phoenix_prototype
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-
             var workArea = SystemParameters.WorkArea; 
             this.Left = workArea.Left; 
             this.Top = workArea.Top; 
             this.Width = workArea.Width; 
             this.Height = workArea.Height;
 
-            //var orders = new Orders();
-            //orders.Owner = this; //this means that the owner of the Orders window is "Watchlist". 
-            //// add this snippet to the orders.xaml code:
-            //// ShowInTaskbar="False"
-            //orders.Show();
+            windowSearch = new search();
+            windowSearch.Owner = this;
+            windowSearch.Show();
+        }
 
-            //var watchlist = new Watchlist();
-            //watchlist.Owner = this;
-            //watchlist.Show();
+        private void WindowAdjustTestButton_Click(object sender, RoutedEventArgs e)
+        {
+            setHardDimensionsOnWindow(windowWatchlist, 425.6, 396, -0.8, 76);
+            setHardDimensionsOnWindow(windowOrders, 326.40000000000003, 397.6, 0, 498.40000000000003);
+            setHardDimensionsOnWindow(windowSearch, 450.40000000000003, 627.2, 388.8, 73.60000000000001);
+            setHardDimensionsOnWindow(windowNews, 305.6, 627.2, 389.6, 520);
+        }
 
-            var search = new search();
-            search.Owner = this;
-            search.Show();
+        private void WindowStatsButton_Click(object sender, RoutedEventArgs e)
+        {
 
+            Debug.WriteLine("Full Screen Width: " + SystemParameters.PrimaryScreenWidth);
+            Debug.WriteLine("Full Screen Height: " + SystemParameters.PrimaryScreenHeight);
+
+
+            // work area excluding the task bar:
+
+            Rect workArea = SystemParameters.WorkArea;
+
+            double usableWidth = workArea.Width;
+            double usableHeight = workArea.Height;
+            double usableLeft = workArea.Left;
+            double usableTop = workArea.Top;
+
+            readWindowStats(windowSearch, "SEARCH");
+            readWindowStats(windowOrders, "ORDERS");
+            readWindowStats(windowNews, "NEWS");
+            readWindowStats(windowWatchlist, "WATCHLIST");
 
         }
+
+
+
+        private void readWindowStats (Window window, string windowName)
+        {
+            if (window != null)
+            {
+                Debug.WriteLine("DEBUG>> [" + windowName + "_WINDOW] Height is " + window.Height);
+                Debug.WriteLine("DEBUG>> [" + windowName+ "] Width is " + window.Width);
+                Debug.WriteLine("DEBUG>> [" + windowName + "] X point coordinate: " + window.Left);
+                Debug.WriteLine("DEBUG>> [" + windowName+  "] Y point coordinate: " + window.Top);
+
+            }
+        }
+
+        private void setHardDimensionsOnWindow(Window window, double height, double width, double pointX, double pointY)
+        {
+            if (window != null)
+            {
+                window.Height = height;
+                window.Width = width;
+                window.Left = pointX;
+                window.Top = pointY;
+            }
+        }
+
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
@@ -57,23 +108,23 @@ namespace phoenix_prototype
 
         private void Watchlist_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Watchlist();   // Watchlist.xaml → class Watchlist
-            window.Owner = this;            // Optional: keeps it tied to main window
-            window.Show();                  // or ShowDialog() if you want modal
+            windowWatchlist = new Watchlist();   // Watchlist.xaml → class Watchlist
+            windowWatchlist.Owner = this;            // Optional: keeps it tied to main window
+            windowWatchlist.Show();                  // or ShowDialog() if you want modal
         }
 
         private void Orders_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Orders();
-            window.Owner = this;
-            window.Show();
+            windowOrders = new Orders();
+            windowOrders.Owner = this;
+            windowOrders.Show();
         }
 
         private void News_Click(object sender, RoutedEventArgs e)
         {
-            var window = new Reports();
-            window.Owner = this;
-            window.Show();
+            windowNews = new Reports();
+            windowNews.Owner = this;
+            windowNews.Show();
         }
         private void MinimiseButton_Click(object sender, RoutedEventArgs e)
         {
