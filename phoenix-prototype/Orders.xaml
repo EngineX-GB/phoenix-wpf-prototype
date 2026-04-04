@@ -236,7 +236,7 @@
                                     <Setter Property="Foreground" Value="Red"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding Status}" Value="EXECUTED">
-                                    <Setter Property="Foreground" Value="LightGreen"/>
+                                    <Setter Property="Foreground" Value="LimeGreen"/>
                                 </DataTrigger>
                                 <DataTrigger Binding="{Binding Status}" Value="COMMITTED">
                                     <Setter Property="Foreground" Value="LightBlue"/>

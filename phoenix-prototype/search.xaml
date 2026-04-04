@@ -198,7 +198,7 @@
                          KeyDown="SearchField_KeyDown"/>
                 <Button Content=" Search " Background="DarkGray" Margin="5,0,5,0" Padding="1" ToolTip="Search" Width="50" Click="RunSearchQuery_Click"/>
                 <Button Content=" Reset " Background="DarkGray" ToolTip="Reset" Width="50" Click="ResetButton_Click"/>
-                <Button Content=" Buy " Background="LightGreen" ToolTip="Place a Buy Order" Width="50"/>
+                <Button Content=" Buy " Background="LimeGreen" ToolTip="Place a Buy Order" Width="50"/>
             </StackPanel>
         </Border>
 
@@ -277,7 +277,7 @@
             <DataGrid.CellStyle>
                 <Style TargetType="DataGridCell">
                     <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Foreground" Value="LightGray"/>
 
                     <Style.Triggers>
                         <Trigger Property="IsSelected" Value="True">
@@ -339,6 +339,7 @@
                 <DataGridTextColumn Header="Telephone" Binding="{Binding Telephone}" Width="Auto"   />
                 <DataGridTextColumn Header="Location" Binding="{Binding Location}" Width="Auto" />
                 <DataGridTextColumn Header="r100" Binding="{Binding R100}" Width="Auto" />
+                <DataGridTextColumn Header="%chg 100" Binding="{Binding D100}" Width="Auto" />
                 <DataGridTextColumn Header="r150" Binding="{Binding R150}" Width="Auto" />
                 <DataGridTextColumn Header="r200" Binding="{Binding R200}" Width="Auto"/>
                 <DataGridTextColumn Header="Height" Binding="{Binding Height}" Width="Auto" />

@@ -24,6 +24,8 @@ namespace phoenix_prototype
         public string Location { get; set; }
         [JsonPropertyName("r100")]
         public int R100 { get; set; }
+        [JsonPropertyName("d100")]
+        public int D100 { get; set; }
         [JsonPropertyName("r150")]
         public int R150 { get; set; }
         [JsonPropertyName("r200")]
