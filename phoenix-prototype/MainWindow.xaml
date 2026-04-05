@@ -188,20 +188,26 @@
           Background="#222"
           Foreground="White"
           Height="25">
-            <MenuItem Header="File">
-                <MenuItem Header="New"/>
-                <MenuItem Header="Open"/>
-                <MenuItem Header="Exit"/>
+            <MenuItem Header="System">
+                <MenuItem Header="Exit" />
+            </MenuItem>
 
+
+            <MenuItem Header="Feed">
+                <MenuItem Header="Load Market Data"/>
+                <MenuItem Header="Load News and Ratings"/>
+                <MenuItem Header="Load Service Reports"/>
             </MenuItem>
 
             <MenuItem Header="View">
-                <MenuItem Header="Refresh"/>
-                <Separator />
                 <MenuItem Header="Watchlist" Click="Watchlist_Click"/>
                 <MenuItem Header="Orders" Click="Orders_Click"/>
                 <MenuItem Header="Listings" />
                 <MenuItem Header="News" Click="News_Click" />
+                <Separator />
+                <MenuItem Header="Save Current Layout" />
+                <MenuItem Header="Load Saved Layout" />
+                <MenuItem Header="Export Existing Layout" />
             </MenuItem>
 
             <MenuItem Header="Help"/>

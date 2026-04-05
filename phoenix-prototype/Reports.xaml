@@ -348,7 +348,7 @@
                                                 <Setter Property="Foreground" Value="Red"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Rating}" Value="POSITIVE">
-                                                <Setter Property="Foreground" Value="GreenYellow"/>
+                                                <Setter Property="Foreground" Value="LimeGreen"/>
                                             </DataTrigger>
                                             <DataTrigger Binding="{Binding Rating}" Value="NEUTRAL">
                                                 <Setter Property="Foreground" Value="DarkGray"/>
