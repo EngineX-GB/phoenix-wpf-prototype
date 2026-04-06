@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text.Json;
@@ -14,6 +15,8 @@ namespace phoenix_prototype
     /// </summary>
     public partial class Reports : Window
     {
+        private readonly AppDataService _data;
+
         [DllImport("dwmapi.dll")]
         private static extern int DwmSetWindowAttribute(
     IntPtr hwnd,
@@ -38,28 +41,29 @@ namespace phoenix_prototype
             int borderColor = unchecked((int)0xFF1A1A1A); // match your window background
             DwmSetWindowAttribute(hwnd, DWMWA_BORDER_COLOR, ref borderColor, sizeof(int));
         }
-        public ObservableCollection<FeedbackEntry> FeedbackEntries { get; set; } = new ObservableCollection<FeedbackEntry>();
-        public ObservableCollection<ServiceReportHeadlineEntry> ServiceReportHeadlineEntries{ get; set; } = new ObservableCollection<ServiceReportHeadlineEntry>();
-
-        public Reports()
+        public Reports(AppDataService data)
         {
             InitializeComponent();
-            DataContext = this;
+            _data = data;
+            DataContext = _data;
+            _data.SearchEntrySelected += OnSearchRowSelected;   // subscribe to the event when a search entry is selected, then News panel should react
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        /**
+         * When a row is selected on the search grid (i.e when the asset is selected, then show the ratings/ news
+         * for that asset, taking the user id field and fetching the news on the News Panel.
+         */
+        private async void OnSearchRowSelected(SearchEntry searchEntry)
         {
-
-            //var orders = new Orders();
-            //orders.Owner = this; //this means that the owner of the Orders window is "Watchlist". 
-            //// add this snippet to the orders.xaml code:
-            //// ShowInTaskbar="False"
-            //orders.Show();
-
-            //await LoadWatchlistAsync();
-
-
+            if (searchEntry.UserId != "")
+            {
+                UserID.Text = searchEntry.UserId;
+                await LoadFeedbackAsync(searchEntry.UserId, null);
+                await LoadServiceReportsAsync(UserID.Text);
+            }
         }
+
+        private async void Window_Loaded(object sender, RoutedEventArgs e) {}
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
@@ -115,13 +119,13 @@ namespace phoenix_prototype
             }
             else if (direction == "FORWARD")
             {
-                var feedbackEntry = FeedbackEntries[^1];    // get the last entry in the collection that is currently viewing (before getting the next batch)
+                var feedbackEntry = _data.FeedbackEntries[^1];    // get the last entry in the collection that is currently viewing (before getting the next batch)
                 int offsetId = feedbackEntry.Oid;
                 url = "http://localhost:8081/feedback?userId=" + userId + "&pageDirection=" + direction + "&offset=" + offsetId.ToString();
             }
             else
             {
-                var feedbackEntry = FeedbackEntries.First();
+                var feedbackEntry = _data.FeedbackEntries.First();
                 int offsetId = feedbackEntry.Oid;
                 url = "http://localhost:8081/feedback?userId=" + userId + "&pageDirection=" + direction + "&offset=" + offsetId.ToString();
             }
@@ -135,9 +139,9 @@ namespace phoenix_prototype
 
             var items = JsonSerializer.Deserialize<FeedbackResponse>(json);
 
-            FeedbackEntries.Clear();
+            _data.FeedbackEntries.Clear();
             foreach (var item in items.entries)
-                FeedbackEntries.Add(item);
+                _data.FeedbackEntries.Add(item);
         }
 
         public async Task LoadServiceReportsAsync(string userId)
@@ -151,9 +155,9 @@ namespace phoenix_prototype
             string json = await response.Content.ReadAsStringAsync();
             var items = JsonSerializer.Deserialize<List<ServiceReportHeadlineEntry>>(json);
 
-            ServiceReportHeadlineEntries.Clear();
+            _data.ServiceReportHeadlineEntries.Clear();
             foreach (var item in items)
-                ServiceReportHeadlineEntries.Add(item);
+                _data.ServiceReportHeadlineEntries.Add(item);
         }
 
     }

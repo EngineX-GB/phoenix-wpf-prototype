@@ -138,7 +138,7 @@
         </Border>
 
         <DataGrid x:Name="DataGridOrders" 
-          ItemsSource="{Binding orderEntries}"
+          ItemsSource="{Binding OrderEntries}"
           AutoGenerateColumns="False"
           Background="#1A1A1A"
           Foreground="White"

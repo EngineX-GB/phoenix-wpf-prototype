@@ -17,6 +17,8 @@ namespace phoenix_prototype
     public partial class Orders : Window
     {
 
+        private readonly AppDataService _data;
+
         [DllImport("dwmapi.dll")]
         private static extern int DwmSetWindowAttribute(
     IntPtr hwnd,
@@ -41,18 +43,13 @@ namespace phoenix_prototype
             int borderColor = unchecked((int)0xFF1A1A1A); // match your window background
             DwmSetWindowAttribute(hwnd, DWMWA_BORDER_COLOR, ref borderColor, sizeof(int));
         }
-        public ObservableCollection<OrderEntry> orderEntries { get; set; } = new ObservableCollection<OrderEntry>();
+        //public ObservableCollection<OrderEntry> OrderEntries { get; set; } = new ObservableCollection<OrderEntry>();
 
-        public Orders()
+        public Orders(AppDataService data)
         {
             InitializeComponent();
-            DataContext = this;
-            //var dummyOrders = new List<OrderEntry>
-            //{
-            //    new OrderEntry() { Id = 1, Username = "Charlotte", Region = "UK", Rate = 100, DateOfEvent = new DateOnly(2026,1,1), TimeOfEvent = new TimeSpan(9,0,0), Status = "PROPOSED" }
-            //};
-
-            //DataGridOrders.ItemsSource = dummyOrders;
+            _data = data;
+            DataContext = _data;
         }
 
         public async Task LoadAllOrdersAsync()
@@ -71,9 +68,9 @@ namespace phoenix_prototype
 
             var items = JsonSerializer.Deserialize<List<OrderEntry>>(json);
 
-            orderEntries.Clear();
+            _data.OrderEntries.Clear();
             foreach (var item in items)
-                orderEntries.Add(item);
+                _data.OrderEntries.Add(item);
         }
 
         public bool CancelOrder(string orderId)

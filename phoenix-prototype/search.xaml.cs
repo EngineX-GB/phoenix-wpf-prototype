@@ -25,12 +25,14 @@ namespace phoenix_prototype
     public partial class search : Window
     {
 
+        private readonly AppDataService _data;
+
         [DllImport("dwmapi.dll")]
         private static extern int DwmSetWindowAttribute(
-    IntPtr hwnd,
-    int attr,
-    ref int attrValue,
-    int attrSize);
+            IntPtr hwnd,
+            int attr,
+            ref int attrValue,
+            int attrSize);
 
         private const int DWMWA_USE_IMMERSIVE_DARK_MODE = 20;
         private const int DWMWA_BORDER_COLOR = 34;
@@ -50,12 +52,13 @@ namespace phoenix_prototype
             DwmSetWindowAttribute(hwnd, DWMWA_BORDER_COLOR, ref borderColor, sizeof(int));
         }
 
-        public ObservableCollection<SearchEntry> searchEntries { get; set; } = new ObservableCollection<SearchEntry>();
+        //public ObservableCollection<SearchEntry> searchEntries { get; set; } = new ObservableCollection<SearchEntry>();
 
-        public search()
+        public search(AppDataService data)
         {
             InitializeComponent();
-            DataContext = this;
+            _data = data;
+            DataContext = _data;
         }
 
         // Make the REST call when the window opens
@@ -85,10 +88,10 @@ namespace phoenix_prototype
 
                 var items = JsonSerializer.Deserialize<List<SearchEntry>>(json);
 
-                searchEntries.Clear();
+                _data.SearchEntries.Clear();
                 foreach (var item in items)
-                    searchEntries.Add(item);
-                StatusText.Text = "Received " + searchEntries.Count + " client(s)";
+                    _data.SearchEntries.Add(item);
+                StatusText.Text = "Received " + _data.SearchEntries.Count + " client(s)";
             }
             catch (HttpRequestException hre)
             {
@@ -135,10 +138,10 @@ namespace phoenix_prototype
                 string json = await response.Content.ReadAsStringAsync();
                 var items = JsonSerializer.Deserialize<List<SearchEntry>>(json);
 
-                searchEntries.Clear();
+                _data.SearchEntries.Clear();
                 foreach (var item in items)
-                    searchEntries.Add(item);
-                StatusText.Text = "Received " + searchEntries.Count + " client(s)";
+                    _data.SearchEntries.Add(item);
+                StatusText.Text = "Received " + _data.SearchEntries.Count + " client(s)";
             }
             catch (HttpRequestException hre)
             {
@@ -151,8 +154,6 @@ namespace phoenix_prototype
                 StatusText.Text = "Error: An unexpected error has occurred. " + ex.Message;
             }
         }
-
-
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
@@ -181,8 +182,13 @@ namespace phoenix_prototype
             }
         }
 
-
-
+        private void DataGridSearchEntries_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataGridSearch.SelectedItem is SearchEntry selectedSearchEntry)
+            {
+                _data.NotifySearchEntrySelected(selectedSearchEntry);
+            }
+        }
 
 
     }

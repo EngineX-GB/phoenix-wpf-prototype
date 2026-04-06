@@ -27,6 +27,8 @@ namespace phoenix_prototype
         private Window windowNews;
         private Window windowSearch;
 
+        public AppDataService DataService { get; } = new();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -40,7 +42,7 @@ namespace phoenix_prototype
             this.Width = workArea.Width; 
             this.Height = workArea.Height;
 
-            windowSearch = new search();
+            windowSearch = new search(DataService);
             windowSearch.Owner = this;
             windowSearch.Show();
         }
@@ -108,21 +110,21 @@ namespace phoenix_prototype
 
         private void Watchlist_Click(object sender, RoutedEventArgs e)
         {
-            windowWatchlist = new Watchlist();   // Watchlist.xaml → class Watchlist
+            windowWatchlist = new Watchlist(DataService);   // Watchlist.xaml → class Watchlist
             windowWatchlist.Owner = this;            // Optional: keeps it tied to main window
             windowWatchlist.Show();                  // or ShowDialog() if you want modal
         }
 
         private void Orders_Click(object sender, RoutedEventArgs e)
         {
-            windowOrders = new Orders();
+            windowOrders = new Orders(DataService);
             windowOrders.Owner = this;
             windowOrders.Show();
         }
 
         private void News_Click(object sender, RoutedEventArgs e)
         {
-            windowNews = new Reports();
+            windowNews = new Reports(DataService);
             windowNews.Owner = this;
             windowNews.Show();
         }

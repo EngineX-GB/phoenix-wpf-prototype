@@ -85,7 +85,7 @@ namespace phoenix_prototype {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/phoenix-prototype;V1.0.0.0;component/reports.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/phoenix-prototype;component/reports.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\Reports.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

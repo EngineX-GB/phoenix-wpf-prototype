@@ -16,6 +16,8 @@ namespace phoenix_prototype
     public partial class Watchlist : Window
     {
 
+        private readonly AppDataService _data;
+
         [DllImport("dwmapi.dll")]
         private static extern int DwmSetWindowAttribute(
             IntPtr hwnd,
@@ -41,22 +43,11 @@ namespace phoenix_prototype
             DwmSetWindowAttribute(hwnd, DWMWA_BORDER_COLOR, ref borderColor, sizeof(int));
         }
 
-        public ObservableCollection<WatchlistEntry> WatchlistCollection { get; set; } = new ObservableCollection<WatchlistEntry>();
-        public Watchlist()
+        public Watchlist(AppDataService data)
         {
             InitializeComponent();
-
-            DataContext = this;
-
-            //var dummyData = new List<WatchlistEntry>
-            //{
-            //    new WatchlistEntry { UserId = "1", Username = "Alice", Nationality = "British", Telephone = "555-1234", Rate = 120, Location = "London" },
-            //    new WatchlistEntry { UserId = "2",  Username = "Bob", Nationality = "British", Telephone = "555-5678", Rate = 95, Location = "Manchester" },
-            //    new WatchlistEntry { UserId = "3",  Username = "Charlie", Nationality = "British",  Telephone = "555-9012", Rate = 150, Location = "Birmingham" },
-            //    new WatchlistEntry { UserId = "4",  Username = "Diana", Nationality = "British", Telephone = "555-3456", Rate = 200, Location = "Liverpool" }
-            //};
-
-            //DataGridWatchlist.ItemsSource = dummyData;
+            _data = data;
+            DataContext = _data;
         }
 
         public async Task LoadWatchlistAsync()
@@ -76,24 +67,15 @@ namespace phoenix_prototype
 
             var items = JsonSerializer.Deserialize<List<WatchlistEntry>>(json);
 
-            WatchlistCollection.Clear();
+            _data.WatchlistCollection.Clear();
             foreach (var item in items)
-                WatchlistCollection.Add(item);
+                _data.WatchlistCollection.Add(item);
         }
 
         // Make the REST call when the window opens
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-
-            //var orders = new Orders();
-            //orders.Owner = this; //this means that the owner of the Orders window is "Watchlist". 
-            //// add this snippet to the orders.xaml code:
-            //// ShowInTaskbar="False"
-            //orders.Show();
-
             await LoadWatchlistAsync();
-
-
         }
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
@@ -141,9 +123,6 @@ namespace phoenix_prototype
             var response = await client.PostAsync("http://localhost:8081/watchlist/import", form);
             response.EnsureSuccessStatusCode();
         }
-
-
-
 
     }
 }

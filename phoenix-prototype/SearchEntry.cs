@@ -54,7 +54,8 @@ namespace phoenix_prototype
 
 
 
-
+        [JsonPropertyName("userId")]
+        public string UserId { get; set; }
 
         [JsonPropertyName("username")]
         public string Username { get; set; }

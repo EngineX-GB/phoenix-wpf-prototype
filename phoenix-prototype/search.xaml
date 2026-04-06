@@ -223,7 +223,8 @@
 
 
         <DataGrid x:Name="DataGridSearch" 
-          ItemsSource="{Binding searchEntries}"
+          SelectionChanged="DataGridSearchEntries_SelectionChanged"
+          ItemsSource="{Binding SearchEntries}"
           AutoGenerateColumns="False"
           Background="#1A1A1A"
           Foreground="White"
