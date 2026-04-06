@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Runtime.InteropServices;
 using System.Text.Json;
 using System.Windows;
@@ -48,6 +49,7 @@ namespace phoenix_prototype
             InitializeComponent();
             _data = data;
             DataContext = _data;
+            _data.WatchlistUpdated += LoadWatchlistAsync; // subscribe for user adding a user to watchlist from search window
         }
 
         public async Task LoadWatchlistAsync()
@@ -121,6 +123,37 @@ namespace phoenix_prototype
             form.Add(fileContent, "file", System.IO.Path.GetFileName(filePath));
 
             var response = await client.PostAsync("http://localhost:8081/watchlist/import", form);
+            response.EnsureSuccessStatusCode();
+        }
+
+
+        public async void DeleteFromWatchList_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataGridWatchlist.SelectedItem is WatchlistEntry selected)
+            {
+                await DeleteFromWatchlistAsync(selected.UserId);
+                await LoadWatchlistAsync();
+            }
+        }
+
+        public async Task DeleteFromWatchlistAsync(string UserId)
+        {
+            using var client = new HttpClient();
+
+            var payload = new
+            {
+                userId = UserId
+            };
+
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Delete,
+                RequestUri = new Uri("http://localhost:8081/watchlist"),
+                Content = JsonContent.Create(payload)   // attaches JSON body
+            };
+
+            var response = await client.SendAsync(request);
+
             response.EnsureSuccessStatusCode();
         }
 

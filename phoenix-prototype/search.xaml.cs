@@ -190,6 +190,34 @@ namespace phoenix_prototype
             }
         }
 
+        private async void AddToWatchlist_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataGridSearch.SelectedItem is SearchEntry selected)
+            {
+                try
+                {
+                    StatusText.Text = "Adding...";
+
+                    await _data.AddToWatchlistAsync(selected.UserId);
+
+                    StatusText.Text = "Added to Watchlist";
+
+                    // Notify Watchlist window to reload
+                    _data.NotifyWatchlistUpdated();
+                }
+                catch (Exception ex)
+                {
+                    StatusText.Text = "Error adding to watchlist";
+                    MessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                StatusText.Text = "No row selected";
+            }
+        }
+
+
 
     }
 }

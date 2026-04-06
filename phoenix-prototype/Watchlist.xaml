@@ -123,7 +123,7 @@
             </Border.Resources>
             <StackPanel Orientation="Horizontal">
                 <Button Content="⟳" Style="{StaticResource DarkButton}" ToolTip="Refresh" Click="RefreshButton_Click"/>
-                <Button Content="⨯" Style="{StaticResource DarkButton}" ToolTip="Remove"/>
+                <Button Content="⨯" Style="{StaticResource DarkButton}" ToolTip="Remove" Click="DeleteFromWatchList_Click"/>
                 <Button Content="⬇" Style="{StaticResource DarkButton}" ToolTip="Import Watchlist" Click="ImportWatchlist_Click"/>
             </StackPanel>
         </Border>
