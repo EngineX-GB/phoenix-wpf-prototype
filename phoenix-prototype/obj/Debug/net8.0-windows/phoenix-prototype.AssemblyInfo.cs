@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("phoenix-prototype")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+42dd7f2e84474b05438aa9f7087d108cbec93eb3")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ff01862e87c9720d3e9042adc88d02cfb45067a8")]
 [assembly: System.Reflection.AssemblyProductAttribute("phoenix-prototype")]
 [assembly: System.Reflection.AssemblyTitleAttribute("phoenix-prototype")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
