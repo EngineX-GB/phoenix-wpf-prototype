@@ -26,15 +26,19 @@ namespace phoenix_prototype
         private Window windowOrders;
         private Window windowNews;
         private Window windowSearch;
+        private Notifications windowNotifications;
 
-        private readonly MainViewModel _vm = new MainViewModel();
+
+        private readonly MainViewModel _vm;
 
         public AppDataService DataService { get; } = new();
 
         public MainWindow()
         {
             InitializeComponent();
+            _vm = new MainViewModel(this);
             DataContext = _vm;
+
 
             Debug.WriteLine("MainWindow DataContext set to MainViewModel");
             Loaded += async (_, __) => await _vm.InitializeAsync();
@@ -51,7 +55,19 @@ namespace phoenix_prototype
             windowSearch = new search(DataService);
             windowSearch.Owner = this;
             windowSearch.Show();
+
+            windowNotifications = new Notifications();
+            windowNotifications.Owner = this;
+            windowNotifications.Show();
+
         }
+
+        public void AddNotification(NotificationListEntry entry)
+        {
+            windowNotifications?.AddNotificationToList(entry);
+        }
+
+
 
         private void WindowAdjustTestButton_Click(object sender, RoutedEventArgs e)
         {
@@ -121,6 +137,13 @@ namespace phoenix_prototype
             windowWatchlist.Show();                  // or ShowDialog() if you want modal
         }
 
+        private void Notifications_Click(object sender, RoutedEventArgs e)
+        {
+            windowNotifications = new Notifications();
+            windowNotifications.Owner = this;
+            windowNotifications.Show();
+        }
+
         private void Orders_Click(object sender, RoutedEventArgs e)
         {
             windowOrders = new Orders(DataService);
@@ -151,6 +174,8 @@ namespace phoenix_prototype
         {
             await TogglePingService("market");
         }
+
+ 
 
 
 

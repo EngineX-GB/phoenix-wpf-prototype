@@ -204,6 +204,7 @@
                 <MenuItem Header="Orders" Click="Orders_Click"/>
                 <MenuItem Header="Listings" />
                 <MenuItem Header="News" Click="News_Click" />
+                <MenuItem Header="Notifications" Click="Notifications_Click" />
                 <Separator />
                 <MenuItem Header="Save Current Layout" />
                 <MenuItem Header="Load Saved Layout" />

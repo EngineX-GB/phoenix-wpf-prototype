@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using phoenix_prototype;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -11,9 +13,16 @@ public class MainViewModel : INotifyPropertyChanged
 
     private string _latestStatus;
 
-
     private Brush _ingestionStatusColor = Brushes.DarkGray;
-    
+
+
+    private readonly MainWindow _mainWindow;
+
+    public MainViewModel(MainWindow mainWindow)
+    {
+        _mainWindow = mainWindow;
+    }
+
     // colour for service ping status
     public Brush IngestionStatusColor
     {
@@ -27,8 +36,6 @@ public class MainViewModel : INotifyPropertyChanged
         get => _marketStatusColor;
         set { _marketStatusColor = value; OnPropertyChanged(); }
     }
-
-
 
     public string LatestStatus
     {
@@ -79,6 +86,21 @@ public class MainViewModel : INotifyPropertyChanged
                     UpdateColor(ref _marketStatusColor, notif.Content.Status, nameof(MarketStatusColor));
                     break;
             }
+
+
+            // adding logic here for updating the notification window.
+
+            // Forward to Notifications window
+            var entry = new NotificationListEntry
+            {
+                Timestamp = DateTime.Now.ToString("HH:mm:ss"),
+                Operation = notif.Content.Operation,
+                Status = notif.Content.Status,
+                Detail = notif.Content.Detail
+            };
+
+            _mainWindow.AddNotification(entry);
+
         });
     }
 

@@ -29,3 +29,5 @@ C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\Reports.g.cs
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\Reports.baml
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\phoenix-prototype_Content.g.cs
+C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\Notifications.g.cs
+C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\Notifications.baml
