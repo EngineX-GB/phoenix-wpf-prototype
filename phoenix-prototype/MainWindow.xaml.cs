@@ -140,5 +140,33 @@ namespace phoenix_prototype
         }
 
 
+
+        public async void IngestionPingButton_Click(object sender, RoutedEventArgs e)
+        {
+            await TogglePingService("ingestion");
+        }
+
+
+        public async void MarketPingButton_Click(object sender, RoutedEventArgs e)
+        {
+            await TogglePingService("market");
+        }
+
+
+
+        // button to toggle the ingestion service pinging
+
+        public async Task TogglePingService(string serviceName)
+        {
+            using var client = new HttpClient();
+
+            // Replace with your real API endpoint
+            string url = "http://localhost:8081/monitor/ping?serviceName=" + serviceName;
+
+            var response = await client.GetAsync(url);
+            response.EnsureSuccessStatusCode();
+        }
+
+
     }
 }

@@ -21,6 +21,14 @@ public class MainViewModel : INotifyPropertyChanged
         set { _ingestionStatusColor = value; OnPropertyChanged(); }
     }
 
+    private Brush _marketStatusColor = Brushes.DarkGray;
+    public Brush MarketStatusColor
+    {
+        get => _marketStatusColor;
+        set { _marketStatusColor = value; OnPropertyChanged(); }
+    }
+
+
 
     public string LatestStatus
     {
@@ -34,35 +42,46 @@ public class MainViewModel : INotifyPropertyChanged
         await _wsService.ConnectAsync("ws://localhost:8081/ws");
     }
 
+
+    private void UpdateColor(ref Brush target, string status, string propertyName)
+    {
+        switch (status)
+        {
+            case "OK":
+                target = Brushes.Aqua;
+                break;
+
+            case "ERROR":
+                target = Brushes.Orange;
+                break;
+
+            case "STOPPED":
+                target = Brushes.LightGray;
+                break;
+        }
+
+        OnPropertyChanged(propertyName);
+    }
+
     private void HandleNotification(Notification notif)
     {
         Debug.WriteLine($"WS NOTIFICATION RECEIVED: {notif.Content.ServiceName} - {notif.Content.Status}");
 
         Application.Current.Dispatcher.Invoke(() =>
         {
-            if (notif.Content.ServiceName == "ingestion")
+            switch (notif.Content.ServiceName.ToLower())
             {
-                Debug.WriteLine("Updating IngestionStatusColor...");
+                case "ingestion":
+                    UpdateColor(ref _ingestionStatusColor, notif.Content.Status, nameof(IngestionStatusColor));
+                    break;
 
-                switch (notif.Content.Status)
-                {
-                    case "OK":
-                        IngestionStatusColor = Brushes.Aqua;
-                        break;
-
-                    case "ERROR":
-                        IngestionStatusColor = Brushes.Orange;
-                        break;
-
-                    case "STOPPED":
-                        IngestionStatusColor = Brushes.LightGray;
-                        break;
-                }
-
-                Debug.WriteLine("New Color: " + IngestionStatusColor.ToString());
+                case "market":
+                    UpdateColor(ref _marketStatusColor, notif.Content.Status, nameof(MarketStatusColor));
+                    break;
             }
         });
     }
+
 
 
 
