@@ -283,7 +283,7 @@
                 <!-- It's similar to the DarkButton theme -->
                 <Style TargetType="Button" x:Key="DarkStatusButton">
                     <Setter Property="Background" Value="Transparent"/>
-                    <Setter Property="Foreground" Value="Aqua"/>
+                    <Setter Property="Foreground" Value="DarkGray"/>
                     <Setter Property="BorderBrush" Value="Transparent"/>
                     <Setter Property="BorderThickness" Value="1"/>
                     <Setter Property="Padding" Value="3,5"/>
@@ -338,7 +338,7 @@
                 <Button Content="📰" Style="{StaticResource DarkButton}" ToolTip="View News and Reports"/>
                 <Button Content="🎭" Style="{StaticResource DarkButton}" ToolTip="Mask Asset Details" Click="WindowAdjustTestButton_Click" IsEnabled="True"/>
                 <Button Content="Market" Style="{StaticResource DarkStatusButton}" ToolTip="Market Connector Status" IsEnabled="True" />
-                <Button Content="Ingestion" Style="{StaticResource DarkStatusButton}" ToolTip="Market Connector Status" IsEnabled="True"/>
+                <Button Content="Ingestion" Style="{StaticResource DarkStatusButton}" ToolTip="Ingestion Connector Status" Foreground="{Binding IngestionStatusColor}" IsEnabled="True"/>
                 <Button Content="Stats" Style="{StaticResource DarkStatusButton}" ToolTip="Window Stats" Click="WindowStatsButton_Click" IsEnabled="True"/>
                 <Button Content="Adjust" Style="{StaticResource DarkStatusButton}" ToolTip="Window Stats" Click="WindowAdjustTestButton_Click" IsEnabled="True"/>
          

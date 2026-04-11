@@ -27,11 +27,17 @@ namespace phoenix_prototype
         private Window windowNews;
         private Window windowSearch;
 
+        private readonly MainViewModel _vm = new MainViewModel();
+
         public AppDataService DataService { get; } = new();
 
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = _vm;
+
+            Debug.WriteLine("MainWindow DataContext set to MainViewModel");
+            Loaded += async (_, __) => await _vm.InitializeAsync();
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
