@@ -58,7 +58,12 @@ namespace phoenix_prototype
 
         public void AddNotificationToList(NotificationListEntry entry)
         {
+            int MaxNotifications = 20;
             NotificationListEntries.Insert(0, entry);
+            // here we don't want to keep adding endless notification messages. Instead limit it, such that
+            // if the maximum capacity is met at 20, then add a new one to the top, but remove the old one from the bottom
+            if (NotificationListEntries.Count > MaxNotifications)
+                NotificationListEntries.RemoveAt(NotificationListEntries.Count - 1);
         }
 
         private void TestNotifications_Click(object sender, RoutedEventArgs e)
@@ -76,7 +81,9 @@ namespace phoenix_prototype
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
-        private void ClearNotifications_Click(object sender, RoutedEventArgs e) { this.Close(); }
+        private void ClearNotifications_Click(object sender, RoutedEventArgs e) {
+            NotificationListEntries.Clear();
+        }
 
         private void PauseNotifications_Click(object sender, RoutedEventArgs e) { this.Close(); }
 

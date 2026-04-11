@@ -112,8 +112,8 @@
                 </Style>
             </Border.Resources>
             <StackPanel Orientation="Horizontal">
-                <Button Content="✚" Style="{StaticResource DarkButton}" ToolTip="Clear" Click="PauseNotifications_Click"/>
-                <Button Content="⨯" Style="{StaticResource DarkButton}" ToolTip="Pause" Click="PauseNotifications_Click"/>
+                <Button Content="⨯" Style="{StaticResource DarkButton}" ToolTip="Clear" Click="ClearNotifications_Click"/>
+                <Button Content="⏸ " Style="{StaticResource DarkButton}" ToolTip="Pause" Click="PauseNotifications_Click"/>
                 <Button Content="⨯" Style="{StaticResource DarkButton}" ToolTip="Test" Click="TestNotifications_Click"/>
             </StackPanel>
         </Border>
