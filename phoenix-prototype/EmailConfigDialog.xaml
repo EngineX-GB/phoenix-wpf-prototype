@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:phoenix_prototype"
         mc:Ignorable="d"
-        Title="EmailConfigDialog" Height="300" Width="400"
+        Title="Email Configuration" Height="300" Width="400"
         WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
+        ShowInTaskbar="False"
         Loaded="LoadOnStartup">
 
     <DockPanel>

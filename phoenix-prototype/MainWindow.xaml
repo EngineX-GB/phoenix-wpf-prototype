@@ -199,18 +199,22 @@
                 <MenuItem Header="Load Service Reports"/>
             </MenuItem>
 
+            <MenuItem Header="Communications">
+                <MenuItem Header="SMTP Settings" Click="SmtpSettings_Click" />
+                <MenuItem Header="Email Account Settings" Click="EmailAccountSettings_Click" />
+
+            </MenuItem>
+
             <MenuItem Header="View">
                 <MenuItem Header="Watchlist" Click="Watchlist_Click"/>
                 <MenuItem Header="Orders" Click="Orders_Click"/>
-                <MenuItem Header="Listings" />
+                <MenuItem Header="Listings" Click="Listings_Click"/>
                 <MenuItem Header="News" Click="News_Click" />
                 <MenuItem Header="Notifications" Click="Notifications_Click" />
                 <Separator />
                 <MenuItem Header="Save Current Layout" />
                 <MenuItem Header="Load Saved Layout" />
                 <MenuItem Header="Export Existing Layout" />
-                <Separator />
-                <MenuItem Header="SMTP Settings" Click="SmtpSettings_Click" />
             </MenuItem>
 
             <MenuItem Header="Help"/>

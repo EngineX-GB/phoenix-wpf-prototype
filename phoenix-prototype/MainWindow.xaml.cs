@@ -157,6 +157,15 @@ namespace phoenix_prototype
             windowNews.Owner = this;
             windowNews.Show();
         }
+
+        private void Listings_Click(object sender, RoutedEventArgs args)
+        {
+            windowSearch = new search(DataService);
+            windowSearch.Owner = this;
+            windowSearch.Show();
+        }
+
+
         private void MinimiseButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
@@ -182,7 +191,12 @@ namespace phoenix_prototype
             emailConfigDialog.ShowDialog();
         }
 
-
+        public void EmailAccountSettings_Click(object sender, RoutedEventArgs e)
+        {
+            var emailAccountDialog = new EmailAccountDialog();
+            emailAccountDialog.Owner = this;
+            emailAccountDialog.ShowDialog();
+        }
 
         // button to toggle the ingestion service pinging
 

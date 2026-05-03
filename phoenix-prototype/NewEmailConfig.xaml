@@ -5,6 +5,7 @@
         Height="300" Width="450"
         Background="#1A1A1A"
         WindowStyle="ToolWindow"
+        ShowInTaskbar="False"
         WindowStartupLocation="CenterOwner"
         ResizeMode="NoResize">
 
