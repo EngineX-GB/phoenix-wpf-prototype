@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET8_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\App.xaml
-6-1876990952
+8-494261599
 
-23-942888661
+25-2012619013
 198-192518753
-MainWindow.xaml;Notifications.xaml;Orders.xaml;Reports.xaml;search.xaml;Watchlist.xaml;
+EmailConfigDialog.xaml;ImageViewer.xaml;MainWindow.xaml;Notifications.xaml;Orders.xaml;Reports.xaml;search.xaml;Watchlist.xaml;
 
 False
 

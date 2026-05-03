@@ -175,7 +175,11 @@ namespace phoenix_prototype
             await TogglePingService("market");
         }
 
- 
+        public void SmtpSettings_Click(object sender, RoutedEventArgs e)
+        {
+            var emailConfigDialog = new EmailConfigDialog();
+            emailConfigDialog.ShowDialog();
+        }
 
 
 

@@ -31,3 +31,7 @@ C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\phoenix-prototype_Content.g.cs
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\Notifications.g.cs
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\Notifications.baml
+C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\ImageViewer.g.cs
+C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\ImageViewer.baml
+C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\EmailConfigDialog.g.cs
+C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\EmailConfigDialog.baml

@@ -209,6 +209,8 @@
                 <MenuItem Header="Save Current Layout" />
                 <MenuItem Header="Load Saved Layout" />
                 <MenuItem Header="Export Existing Layout" />
+                <Separator />
+                <MenuItem Header="SMTP Settings" Click="SmtpSettings_Click" />
             </MenuItem>
 
             <MenuItem Header="Help"/>
