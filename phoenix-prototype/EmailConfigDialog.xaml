@@ -69,8 +69,8 @@
                 </Style>
             </Border.Resources>
             <StackPanel Orientation="Horizontal">
-                <Button Content="✚" Style="{StaticResource DarkButton}" ToolTip="Add Email Configuration"/>
-                <Button Content="⨯" Style="{StaticResource DarkButton}" ToolTip="Remove Email Configuration"/>
+                <Button Content="✚" Style="{StaticResource DarkButton}" ToolTip="Add Email Configuration" Click="AddEmailConfig_Click"/>
+                <Button Content="⨯" Style="{StaticResource DarkButton}" ToolTip="Remove Email Configuration" Click="DeleteEmailConfig_Click"/>
                 <Button Content="✔︎" Style="{StaticResource DarkButton}" ToolTip="Edit Email Configuration"/>
             </StackPanel>
         </Border>
@@ -83,7 +83,7 @@
             BorderThickness="0">
             <Grid>
                 <TextBlock x:Name="StatusText"
-                   Text="Ready"
+                   Text=""
                    VerticalAlignment="Center"
                    Margin="8,0,0,0"
                    Foreground="White"

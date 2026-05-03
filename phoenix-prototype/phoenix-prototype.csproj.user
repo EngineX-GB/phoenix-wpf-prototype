@@ -5,6 +5,9 @@
     <Compile Update="EmailConfigDialog.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="NewEmailConfig.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Notifications.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

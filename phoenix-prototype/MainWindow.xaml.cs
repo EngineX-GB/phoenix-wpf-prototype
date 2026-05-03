@@ -178,6 +178,7 @@ namespace phoenix_prototype
         public void SmtpSettings_Click(object sender, RoutedEventArgs e)
         {
             var emailConfigDialog = new EmailConfigDialog();
+            emailConfigDialog.Owner = this;
             emailConfigDialog.ShowDialog();
         }
 
