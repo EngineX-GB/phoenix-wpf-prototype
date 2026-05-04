@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:phoenix_prototype"
         mc:Ignorable="d"
         Background="#1A1A1A"
-        Title="Order Entry" Height="450" Width="500"
+        Title="Order Entry" Height="550" Width="530"
         ShowInTaskbar="False"
+        WindowStartupLocation="CenterScreen"
         WindowStyle="ToolWindow">
 
     <Window.Resources>
@@ -60,8 +61,10 @@
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
-                <RowDefinition/>
-                <!-- Form -->
+                <RowDefinition Height="Auto"/>
+                <!-- Notes row shrinks -->
+                <RowDefinition Height="Auto"/>
+                <!-- Market Price -->
                 <RowDefinition Height="Auto"/>
                 <!-- Buttons -->
             </Grid.RowDefinitions>
@@ -139,6 +142,7 @@
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
 
                         <Label Grid.Row="0" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Quantity:"/>
@@ -203,10 +207,28 @@
             </StackPanel>
 
 
+            <StackPanel Margin="10,0,10,0" Grid.Row="3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="False" HorizontalAlignment="Right">
+                        <Label Content="Market Price" Foreground="LightGray" Margin="0,0,5,0"/>
+                        <Label Content="158.00 GBP" Foreground="LightGray"/>
+                    </DockPanel>
+
+                </Grid>
+            </StackPanel>
+
+
             <!-- =======================
             BUTTON BAR
           ======================= -->
-            <StackPanel Grid.Row="3"
+            <StackPanel Grid.Row="4"
                    Orientation="Horizontal"
                    HorizontalAlignment="Right"
                    Margin="0,5,0,0">
