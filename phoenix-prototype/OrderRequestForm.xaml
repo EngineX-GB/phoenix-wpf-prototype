@@ -178,7 +178,7 @@
 
 
                 <!-- Content inside the group -->
-            <StackPanel Grid.Row="2" Margin="10,5,10,5">
+            <StackPanel Grid.Row="2" Margin="10,0,10,0">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
@@ -209,7 +209,7 @@
             <StackPanel Grid.Row="3"
                    Orientation="Horizontal"
                    HorizontalAlignment="Right"
-                   Margin="0,20,0,0">
+                   Margin="0,5,0,0">
 
                 <Button Content="Cancel"
                    Width="80"
