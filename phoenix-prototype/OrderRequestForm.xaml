@@ -7,11 +7,12 @@
         mc:Ignorable="d"
         Background="#1A1A1A"
         Title="OrderRequestForm" Height="450" Width="800"
-        ShowInTaskbar="False">
+        ShowInTaskbar="False"
+        WindowStyle="ToolWindow">
 
     <DockPanel>
 
-        <Grid Margin="20">
+        <Grid Margin="20" Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <!-- Form -->
@@ -22,7 +23,7 @@
             <!-- =======================
             FORM AREA
           ======================= -->
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Name="FormAreaGrid">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
@@ -53,18 +54,7 @@
                     </StackPanel>
                 </Border>
 
-
-
-                <Border Grid.Row="1" Padding="0,5,5,5" Margin="0,0,0,0">
-                    <!-- Left side -->
-                    <!-- StackPanel Orientation="Horizontal" Grid.Column="0">
-                        <ComboBox Width="200" Margin="10">
-                            <ComboBoxItem>Quantity</ComboBoxItem>
-                            <ComboBoxItem>Banana</ComboBoxItem>
-                            <ComboBoxItem>Cherry</ComboBoxItem>
-                        </ComboBox>
-                    </StackPanel -->
-
+                <Border Grid.Row="1" Padding="0,5,5,5" Margin="0,0,0,0"  Name="TradeQuantityPriceDataGrid">
                     <Grid Margin="10,10,10,10">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -77,13 +67,27 @@
                         </Grid.RowDefinitions>
 
                         <Label Grid.Row="0" Grid.Column="0" Content="Quantity" Foreground="White" />
-                        <TextBox Background="#333" 
+
+                        <Grid Grid.Row="1" Grid.Column="0" >
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="30" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <Button Content="+" Grid.Row="0" Grid.Column="0" Foreground="DarkGray" Background="#333"/>
+                            <TextBox Background="#333" 
                                  BorderBrush="Gray" 
                                  BorderThickness="1" 
-                                 Grid.Row="1" 
-                                 Grid.Column="0" 
                                  Name="txQuantity"
+                                 Grid.Row="0" Grid.Column="1"
                                  Margin="5,0,5,0"/>
+
+                            <Button Content="+" Grid.Row="0" Grid.Column="2" Foreground="DarkGray" Background="#333" />
+                        </Grid>
 
                         <Label Grid.Row="0" Grid.Column="1" Content="Surplus" Foreground="White" />
                         <TextBox Grid.Row="1" Grid.Column="1" 
@@ -102,12 +106,67 @@
                                  Name="txDeductions"
                                  Margin="5,0,5,0"/>
 
+                    </Grid>
+                </Border>
 
+
+
+
+                <Border Grid.Row="2" Padding="0,5,5,5" Margin="0,0,0,0"  Name="TradeDateSection">
+                    <Grid Margin="10,10,10,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition  Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="Trade Date" Foreground="White" />
+                        <TextBox Grid.Row="1" Grid.Column="0" 
+                             Name="txTradeDate" 
+                             Background="#333" 
+                             BorderBrush="Gray" 
+                             BorderThickness="1"
+                             Margin="5,0,5,0"
+                             />
+
+                        <Label Grid.Row="0" Grid.Column="1" Content="Time" Foreground="White" />
+                        <TextBox Grid.Row="1" Grid.Column="1" 
+                         Name="txTradeTime" 
+                         Background="#333" 
+                         BorderBrush="Gray" 
+                         BorderThickness="1"
+                         
+                         Margin="5,0,5,0"
+                         />
 
                     </Grid>
-                    
                 </Border>
-                
+
+
+                <Border Grid.Row="3" Padding="0,5,5,5" Margin="0,0,0,0"  Name="TradeNotesSection">
+                    <Grid Margin="10,10,10,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition  Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="Trade Notes" Foreground="White" />
+                        <TextBox Grid.Row="1" Grid.Column="0" 
+                             Name="txTradeNotes" 
+                             Background="#333" 
+                             BorderBrush="Gray" 
+                             BorderThickness="1"
+                             Margin="5,0,5,0"
+                             />
+                    </Grid>
+                </Border>
+
             </Grid>
 
             <!-- =======================
