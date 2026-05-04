@@ -41,3 +41,5 @@ C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\NewEmailAccount.g.cs
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\EmailAccountDialog.baml
 C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\NewEmailAccount.baml
+C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\OrderRequestForm.g.cs
+C:\Users\Dell\source\repos\phoenix-prototype\phoenix-prototype\obj\Debug\net8.0-windows\OrderRequestForm.baml

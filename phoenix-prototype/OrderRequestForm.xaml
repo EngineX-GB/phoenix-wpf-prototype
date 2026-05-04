@@ -1,0 +1,139 @@
+﻿<local:PhoenixThemedWindow x:Class="phoenix_prototype.OrderRequestForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:phoenix_prototype"
+        mc:Ignorable="d"
+        Background="#1A1A1A"
+        Title="OrderRequestForm" Height="450" Width="800"
+        ShowInTaskbar="False">
+
+    <DockPanel>
+
+        <Grid Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <!-- Form -->
+                <RowDefinition Height="Auto"/>
+                <!-- Buttons -->
+            </Grid.RowDefinitions>
+
+            <!-- =======================
+            FORM AREA
+          ======================= -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+
+                <Border Grid.Row="0" Background="#1A1A1A" Padding="5,5,5,5">
+                    <!-- Asset Name -->
+                    <StackPanel Grid.Column="0">
+                        <Label Content="Asset Name"
+                          Foreground="White"
+                          Padding="0"
+                          FontSize="20"
+                          VerticalAlignment="Center"
+                          Margin="0,0,5,5"/>
+                        <Label Content="Asset Location, Asset Region"
+                          Foreground="White"
+                          FontSize="10"
+                          Padding="0"
+                          />
+                    </StackPanel>
+                </Border>
+
+
+
+                <Border Grid.Row="1" Padding="0,5,5,5" Margin="0,0,0,0">
+                    <!-- Left side -->
+                    <!-- StackPanel Orientation="Horizontal" Grid.Column="0">
+                        <ComboBox Width="200" Margin="10">
+                            <ComboBoxItem>Quantity</ComboBoxItem>
+                            <ComboBoxItem>Banana</ComboBoxItem>
+                            <ComboBoxItem>Cherry</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel -->
+
+                    <Grid Margin="10,10,10,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition  Height="30"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Content="Quantity" Foreground="White" />
+                        <TextBox Background="#333" 
+                                 BorderBrush="Gray" 
+                                 BorderThickness="1" 
+                                 Grid.Row="1" 
+                                 Grid.Column="0" 
+                                 Name="txQuantity"
+                                 Margin="5,0,5,0"/>
+
+                        <Label Grid.Row="0" Grid.Column="1" Content="Surplus" Foreground="White" />
+                        <TextBox Grid.Row="1" Grid.Column="1" 
+                                 Name="txSurplus" 
+                                 Background="#333" 
+                                 BorderBrush="Gray" 
+                                 BorderThickness="1"
+                                 Margin="5,0,5,0"
+                                 />
+
+                        <Label Grid.Row="0" Grid.Column="2" Content="Deductions" Foreground="White" />
+                        <TextBox Grid.Row="1" Grid.Column="2" 
+                                 Background="#333" 
+                                 BorderBrush="Gray" 
+                                 BorderThickness="1" 
+                                 Name="txDeductions"
+                                 Margin="5,0,5,0"/>
+
+
+
+                    </Grid>
+                    
+                </Border>
+                
+            </Grid>
+
+            <!-- =======================
+            BUTTON BAR
+          ======================= -->
+            <StackPanel Grid.Row="1"
+                   Orientation="Horizontal"
+                   HorizontalAlignment="Right"
+                   Margin="0,20,0,0">
+
+                <Button Content="Add"
+                   Width="80"
+                   Margin="0,0,10,0"
+                   Background="#333"
+                   Foreground="White"
+                   BorderBrush="#555"/>
+
+                <Button Content="Cancel"
+                   Width="80"
+                   Background="#333"
+                   Foreground="White"
+                   BorderBrush="#555"/>
+            </StackPanel>
+        </Grid>
+
+
+    </DockPanel>
+
+</local:PhoenixThemedWindow>

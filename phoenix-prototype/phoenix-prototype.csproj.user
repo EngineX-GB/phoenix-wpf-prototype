@@ -17,6 +17,9 @@
     <Compile Update="Notifications.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="OrderRequestForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Orders.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

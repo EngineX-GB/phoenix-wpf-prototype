@@ -217,7 +217,11 @@ namespace phoenix_prototype
             }
         }
 
-
+        private void RaiseOrder_Click(object sender, RoutedEventArgs e)
+        {
+            var form = new OrderRequestForm();
+            form.ShowDialog();
+        }
 
     }
 }

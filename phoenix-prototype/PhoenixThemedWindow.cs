@@ -40,9 +40,9 @@ namespace phoenix_prototype
             DwmSetWindowAttribute(hwnd, DWMWA_BORDER_COLOR, ref borderColor, sizeof(int));
         }
 
-        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
+        protected void TitleBar_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
 
-        private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
+        protected void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
     }
 }
