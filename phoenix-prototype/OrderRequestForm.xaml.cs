@@ -23,5 +23,18 @@ namespace phoenix_prototype
         {
             InitializeComponent();
         }
+
+        private void ProposedOrderMode_Click(object sender, RoutedEventArgs e)
+        {
+            ProposedMode.Background = Brushes.ForestGreen;
+            CommittedMode.Background = (Brush)new BrushConverter().ConvertFromString("#333");
+        }
+
+        private void CommittedOrderMode_Click(object sender, RoutedEventArgs e)
+        {
+            CommittedMode.Background = Brushes.ForestGreen;
+            ProposedMode.Background = (Brush)new BrushConverter().ConvertFromString("#333");
+        }
+
     }
 }

@@ -152,9 +152,25 @@
                         <Label Grid.Row="1" Grid.Column="2" Foreground="DarkGray" Margin="0,3,3,3" Content="Trade Time:" />
                         <TextBox Grid.Row="1" Grid.Column="3" BorderBrush="DarkGray" Margin="0,3,0,3" BorderThickness="1" Style="{StaticResource WatermarkTextBox}" Tag="HH:mm:ss" />
                         <Label Grid.Row="2" Grid.Column="2" Foreground="DarkGray" Margin="0,3,3,3" Content="Order Mode:" />
-                        <TextBox Grid.Row="2" Grid.Column="3" BorderBrush="DarkGray" Margin="0,3,0,3" BorderThickness="1" Style="{StaticResource WatermarkTextBox}" Tag="Order Mode" />
 
-
+                        <StackPanel Grid.Row="2" Grid.Column="3" Orientation="Horizontal" Width="Auto">
+                            <Border BorderBrush="DarkGray"
+                                    x:Name="ProposedBorder"
+                                BorderThickness="1"
+                                CornerRadius="4"
+                                Background="#333"
+                                Padding="3">
+                                <Label Name="ProposedMode" Content="Proposed" Background="ForestGreen" Foreground="White" MouseDown="ProposedOrderMode_Click" />
+                            </Border>
+                            <Border BorderBrush="DarkGray"
+                                BorderThickness="1"
+                                    x:Name="CommittedBorder"
+                                Background="#333"
+                                Padding="3">
+                                <Label Name="CommittedMode" Content="Committed" Background="#333" Foreground="White"  MouseDown="CommittedOrderMode_Click"/>
+                            </Border>
+                        </StackPanel>
+                        
                     </Grid>
                 </StackPanel>
             </Grid>
