@@ -59,6 +59,7 @@
         <Grid Margin="20" Name="MainGrid">
             <Grid.RowDefinitions>
                 <RowDefinition/>
+                <RowDefinition/>
                 <!-- Form -->
                 <RowDefinition Height="Auto"/>
                 <!-- Buttons -->
@@ -68,33 +69,99 @@
             FORM AREA
           ======================= -->
 
-            <StackPanel Grid.Row="0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
+            <Grid Margin="10" Grid.Row="0" Name="AssetDetailsLegend">
+                <!-- Outer border -->
+                <Border BorderBrush="#555"
+                    BorderThickness="1"
+                    CornerRadius="4"
+                    Background="#1A1A1A"
+                    Padding="15,20,15,15"/>
 
-                    <Label Grid.Row="0" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="ID:"/>
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Enter UserID..." />
-                    <Label Grid.Row="1" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Name:"/>
-                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated..." />
-                    <Label Grid.Row="2" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Location:" />
-                    <TextBox Grid.Row="2" Grid.Column="1" BorderBrush="DarkGray" Margin="0,3,0,3" BorderThickness="1" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated.." />
-                </Grid>
+                <!-- Floating legend label -->
+                <Label Content="Order Details"
+                    Background="#1A1A1A"
+                    Foreground="White"
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"/>
+
+                <!-- Content inside the group -->
+                <StackPanel Margin="5,30,30,5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition />
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="ID:"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Enter UserID..." />
+                        <Label Grid.Row="1" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Name:"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated..." />
+                        <Label Grid.Row="2" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Location:" />
+                        <TextBox Grid.Row="2" Grid.Column="1" BorderBrush="DarkGray" Margin="0,3,0,3" BorderThickness="1" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated.." />
+                    </Grid>
+                </StackPanel>
+            </Grid>
 
 
-            </StackPanel>
-            
+            <Grid Margin="10" Grid.Row="1" Name="OrderDetailsLegend">
+                <!-- Outer border -->
+                <Border BorderBrush="#555"
+                    BorderThickness="1"
+                    CornerRadius="4"
+                    Background="#1A1A1A"
+                    Padding="15,20,15,15"/>
+
+                <!-- Floating legend label -->
+                <Label Content="Order Details"
+                    Background="#1A1A1A"
+                    Foreground="White"
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Left"/>
+
+                <!-- Content inside the group -->
+                <StackPanel Margin="5,30,30,5">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Quantity:"/>
+                        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Enter Quantity" />
+                        <Label Grid.Row="1" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Surplus:"/>
+                        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated..." />
+                        <Label Grid.Row="2" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Deductions:" />
+                        <TextBox Grid.Row="2" Grid.Column="1" BorderBrush="DarkGray" Margin="0,3,0,3" BorderThickness="1" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated.." />
+
+                        <Label Grid.Row="0" Grid.Column="2" Foreground="DarkGray" Margin="0,3,3,3" Content="Trade Date:"/>
+                        <TextBox Grid.Row="0" Grid.Column="3" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="YYYY-MM-DD" />
+                        <Label Grid.Row="1" Grid.Column="2" Foreground="DarkGray" Margin="0,3,3,3" Content="Trade Time:" />
+                        <TextBox Grid.Row="1" Grid.Column="3" BorderBrush="DarkGray" Margin="0,3,0,3" BorderThickness="1" Style="{StaticResource WatermarkTextBox}" Tag="HH:mm:ss" />
+
+
+                    </Grid>
+                </StackPanel>
+            </Grid>
+
+
             <!-- =======================
             BUTTON BAR
           ======================= -->
-            <StackPanel Grid.Row="1"
+            <StackPanel Grid.Row="2"
                    Orientation="Horizontal"
                    HorizontalAlignment="Right"
                    Margin="0,20,0,0">
