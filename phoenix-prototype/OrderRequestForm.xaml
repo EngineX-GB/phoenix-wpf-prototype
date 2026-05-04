@@ -6,10 +6,54 @@
         xmlns:local="clr-namespace:phoenix_prototype"
         mc:Ignorable="d"
         Background="#1A1A1A"
-        Title="OrderRequestForm" Height="450" Width="800"
+        Title="Order Entry" Height="450" Width="500"
         ShowInTaskbar="False"
         WindowStyle="ToolWindow">
 
+    <Window.Resources>
+        <Style x:Key="WatermarkTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="#333"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="DarkGray"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="5"/>
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="3">
+
+                            <Grid>
+                                <!-- Actual text -->
+                                <ScrollViewer x:Name="PART_ContentHost"/>
+
+                                <!-- Watermark -->
+                                <TextBlock x:Name="Watermark"
+                                   Text="{TemplateBinding Tag}"
+                                   Foreground="#777"
+                                   Margin="5,0,0,0"
+                                   VerticalAlignment="Center"
+                                   IsHitTestVisible="False"
+                                   Visibility="Collapsed"/>
+                            </Grid>
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Text" Value="">
+                                <Setter TargetName="Watermark" Property="Visibility" Value="Visible"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+
+    </Window.Resources>
+    
     <DockPanel>
 
         <Grid Margin="20" Name="MainGrid">
@@ -23,152 +67,30 @@
             <!-- =======================
             FORM AREA
           ======================= -->
-            <Grid Grid.Row="0" Name="FormAreaGrid">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
 
-
-                <Border Grid.Row="0" Background="#1A1A1A" Padding="5,5,5,5">
-                    <!-- Asset Name -->
-                    <StackPanel Grid.Column="0">
-                        <Label Content="Asset Name"
-                          Foreground="White"
-                          Padding="0"
-                          FontSize="20"
-                          VerticalAlignment="Center"
-                          Margin="0,0,5,5"/>
-                        <Label Content="Asset Location, Asset Region"
-                          Foreground="White"
-                          FontSize="10"
-                          Padding="0"
-                          />
-                    </StackPanel>
-                </Border>
-
-                <Border Grid.Row="1" Padding="0,5,5,5" Margin="0,0,0,0"  Name="TradeQuantityPriceDataGrid">
-                    <Grid Margin="10,10,10,10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition  Height="30"/>
-                        </Grid.RowDefinitions>
-
-                        <Label Grid.Row="0" Grid.Column="0" Content="Quantity" Foreground="White" />
-
-                        <Grid Grid.Row="1" Grid.Column="0" >
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="30" />
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="30" />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
-
-                            <Button Content="+" Grid.Row="0" Grid.Column="0" Foreground="DarkGray" Background="#333"/>
-                            <TextBox Background="#333" 
-                                 BorderBrush="Gray" 
-                                 BorderThickness="1" 
-                                 Name="txQuantity"
-                                 Grid.Row="0" Grid.Column="1"
-                                 Margin="5,0,5,0"/>
-
-                            <Button Content="+" Grid.Row="0" Grid.Column="2" Foreground="DarkGray" Background="#333" />
-                        </Grid>
-
-                        <Label Grid.Row="0" Grid.Column="1" Content="Surplus" Foreground="White" />
-                        <TextBox Grid.Row="1" Grid.Column="1" 
-                                 Name="txSurplus" 
-                                 Background="#333" 
-                                 BorderBrush="Gray" 
-                                 BorderThickness="1"
-                                 Margin="5,0,5,0"
-                                 />
-
-                        <Label Grid.Row="0" Grid.Column="2" Content="Deductions" Foreground="White" />
-                        <TextBox Grid.Row="1" Grid.Column="2" 
-                                 Background="#333" 
-                                 BorderBrush="Gray" 
-                                 BorderThickness="1" 
-                                 Name="txDeductions"
-                                 Margin="5,0,5,0"/>
-
-                    </Grid>
-                </Border>
+                    <Label Grid.Row="0" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="ID:"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Enter UserID..." />
+                    <Label Grid.Row="1" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Name:"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated..." />
+                    <Label Grid.Row="2" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Location:" />
+                    <TextBox Grid.Row="2" Grid.Column="1" BorderBrush="DarkGray" Margin="0,3,0,3" BorderThickness="1" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated.." />
+                </Grid>
 
 
-
-
-                <Border Grid.Row="2" Padding="0,5,5,5" Margin="0,0,0,0"  Name="TradeDateSection">
-                    <Grid Margin="10,10,10,10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition  Height="20"/>
-                        </Grid.RowDefinitions>
-
-                        <Label Grid.Row="0" Grid.Column="0" Content="Trade Date" Foreground="White" />
-                        <TextBox Grid.Row="1" Grid.Column="0" 
-                             Name="txTradeDate" 
-                             Background="#333" 
-                             BorderBrush="Gray" 
-                             BorderThickness="1"
-                             Margin="5,0,5,0"
-                             />
-
-                        <Label Grid.Row="0" Grid.Column="1" Content="Time" Foreground="White" />
-                        <TextBox Grid.Row="1" Grid.Column="1" 
-                         Name="txTradeTime" 
-                         Background="#333" 
-                         BorderBrush="Gray" 
-                         BorderThickness="1"
-                         
-                         Margin="5,0,5,0"
-                         />
-
-                    </Grid>
-                </Border>
-
-
-                <Border Grid.Row="3" Padding="0,5,5,5" Margin="0,0,0,0"  Name="TradeNotesSection">
-                    <Grid Margin="10,10,10,10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition/>
-                            <RowDefinition  Height="20"/>
-                        </Grid.RowDefinitions>
-
-                        <Label Grid.Row="0" Grid.Column="0" Content="Trade Notes" Foreground="White" />
-                        <TextBox Grid.Row="1" Grid.Column="0" 
-                             Name="txTradeNotes" 
-                             Background="#333" 
-                             BorderBrush="Gray" 
-                             BorderThickness="1"
-                             Margin="5,0,5,0"
-                             />
-                    </Grid>
-                </Border>
-
-            </Grid>
-
+            </StackPanel>
+            
             <!-- =======================
             BUTTON BAR
           ======================= -->
@@ -177,18 +99,21 @@
                    HorizontalAlignment="Right"
                    Margin="0,20,0,0">
 
-                <Button Content="Add"
+                <Button Content="Cancel"
                    Width="80"
-                   Margin="0,0,10,0"
+                   Margin="0,0,5,5"
                    Background="#333"
                    Foreground="White"
                    BorderBrush="#555"/>
 
-                <Button Content="Cancel"
+                <Button Content="Submit Order"
                    Width="80"
-                   Background="#333"
+                   Height="30"
+                   Margin="0,0,5,5"
+                   Background="DodgerBlue"
                    Foreground="White"
                    BorderBrush="#555"/>
+
             </StackPanel>
         </Grid>
 
