@@ -9,7 +9,9 @@
         Title="Order Entry" Height="550" Width="530"
         ShowInTaskbar="False"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="ToolWindow">
+        WindowStyle="ToolWindow"
+        BorderThickness="1"
+        BorderBrush="#444">
 
     <Window.Resources>
         <Style x:Key="WatermarkTextBox" TargetType="TextBox">
@@ -194,6 +196,7 @@
 
                     <Label Grid.Row="0" Grid.Column="0" Foreground="DarkGray" Margin="0,0,3,0" Content="Notes:" />
                     <TextBox Grid.Row="1"
+                         Name="TxtNotes"
                          Grid.Column="0"
                          Margin="0,3,0,3"
                          Style="{StaticResource WatermarkTextBox}"
@@ -238,7 +241,8 @@
                    Margin="0,0,5,5"
                    Background="#333"
                    Foreground="White"
-                   BorderBrush="#555"/>
+                   BorderBrush="#555"
+                   Click="CloseButton_Click"/>
 
                 <Button Content="Submit Order"
                    Width="80"
@@ -246,7 +250,8 @@
                    Margin="0,0,5,5"
                    Background="DodgerBlue"
                    Foreground="White"
-                   BorderBrush="#555"/>
+                   BorderBrush="#555"
+                   Click="SubmitOrderRequest"/>
 
             </StackPanel>
         </Grid>

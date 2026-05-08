@@ -25,12 +25,28 @@ namespace phoenix_prototype
         
         [JsonPropertyName("region")]
         public string Region { get; set; }
-        
+
         [JsonPropertyName("rate")]
         public int Rate { get; set; }
+
+        [JsonPropertyName("surplus")]
+        public int Surplus { get; set; }
+
+        [JsonPropertyName("deductions")]
+        public int Deductions { get; set; }
+
+        [JsonPropertyName("duration")]
+        public int Duration { get; set; }
+
+        [JsonPropertyName("price")]
+        public int Price { get; set; }
+
         
         [JsonPropertyName("dateOfEvent")]
         public DateTime DateOfEvent { get; set; }
+
+        [JsonPropertyName("notes")]
+        public string Notes { get; set; }
         
         [JsonPropertyName("timeOfEvent")]
         public TimeSpan TimeOfEvent { get; set; }

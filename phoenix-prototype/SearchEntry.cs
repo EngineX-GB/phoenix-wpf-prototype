@@ -97,6 +97,9 @@ namespace phoenix_prototype
         [JsonPropertyName("previouslyServicedBB")]
         public bool PreviouslyServicedBB { get; set; }
 
+        [JsonPropertyName("region")]
+        public string Region { get; set; }
+
         // Computed property used by the DataGrid
         public int R100Display => (D100 != 0 && BlinkState) ? D100 : R100;
 
