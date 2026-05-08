@@ -103,11 +103,11 @@
                         </Grid.RowDefinitions>
 
                         <Label Grid.Row="0" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="ID:"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Enter UserID..." />
+                        <TextBox Grid.Row="0" Name="TxtUserID" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Enter UserID..." />
                         <Label Grid.Row="1" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Name:"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated..." />
+                        <TextBox Grid.Row="1" Grid.Column="1" Name="TxtUsername" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated..." />
                         <Label Grid.Row="2" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Location:" />
-                        <TextBox Grid.Row="2" Grid.Column="1" BorderBrush="DarkGray" Margin="0,3,0,3" BorderThickness="1" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated.." />
+                        <TextBox Grid.Row="2" Grid.Column="1" Name="TxtLocation" BorderBrush="DarkGray" Margin="0,3,0,3" BorderThickness="1" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated.." />
                     </Grid>
                 </StackPanel>
             </Grid>
@@ -146,16 +146,16 @@
                         </Grid.RowDefinitions>
 
                         <Label Grid.Row="0" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Quantity:"/>
-                        <TextBox Grid.Row="0" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Enter Quantity" />
+                        <TextBox Grid.Row="0" Name="TxtQuantity" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Enter Quantity" KeyUp="AdjustQuantityAndPrice" />
                         <Label Grid.Row="1" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Surplus:"/>
-                        <TextBox Grid.Row="1" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated..." />
+                        <TextBox Grid.Row="1" Name="TxtSurplus" Grid.Column="1" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated..." KeyUp="AdjustQuantityAndPrice" />
                         <Label Grid.Row="2" Grid.Column="0" Foreground="DarkGray" Margin="0,3,3,3" Content="Deductions:" />
-                        <TextBox Grid.Row="2" Grid.Column="1" BorderBrush="DarkGray" Margin="0,3,0,3" BorderThickness="1" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated.." />
+                        <TextBox Grid.Row="2" Grid.Column="1" Name="TxtDeductions" BorderBrush="DarkGray" Margin="0,3,0,3" BorderThickness="1" Style="{StaticResource WatermarkTextBox}" Tag="Auto-populated.." KeyUp="AdjustQuantityAndPrice"/>
 
                         <Label Grid.Row="0" Grid.Column="2" Foreground="DarkGray" Margin="0,3,3,3" Content="Trade Date:"/>
-                        <TextBox Grid.Row="0" Grid.Column="3" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="YYYY-MM-DD" />
+                        <TextBox Grid.Row="0" Grid.Column="3" Name="TxtTradeDate" Margin="0,3,0,3" Style="{StaticResource WatermarkTextBox}" Tag="YYYY-MM-DD" />
                         <Label Grid.Row="1" Grid.Column="2" Foreground="DarkGray" Margin="0,3,3,3" Content="Trade Time:" />
-                        <TextBox Grid.Row="1" Grid.Column="3" BorderBrush="DarkGray" Margin="0,3,0,3" BorderThickness="1" Style="{StaticResource WatermarkTextBox}" Tag="HH:mm:ss" />
+                        <TextBox Grid.Row="1" Grid.Column="3" Name="TxtTradeTime" BorderBrush="DarkGray" Margin="0,3,0,3" BorderThickness="1" Style="{StaticResource WatermarkTextBox}" Tag="HH:mm:ss" />
                         <Label Grid.Row="2" Grid.Column="2" Foreground="DarkGray" Margin="0,3,3,3" Content="Order Mode:" />
 
                         <StackPanel Grid.Row="2" Grid.Column="3" Orientation="Horizontal" Width="Auto">
@@ -218,7 +218,7 @@
 
                     <DockPanel Grid.Row="0" Grid.Column="0" LastChildFill="False" HorizontalAlignment="Right">
                         <Label Content="Market Price" Foreground="LightGray" Margin="0,0,5,0"/>
-                        <Label Content="158.00 GBP" Foreground="LightGray"/>
+                        <Label Content="{Binding MarketPrice}" Foreground="LightGray"/>
                     </DockPanel>
 
                 </Grid>

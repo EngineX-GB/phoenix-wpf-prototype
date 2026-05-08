@@ -219,8 +219,12 @@ namespace phoenix_prototype
 
         private void RaiseOrder_Click(object sender, RoutedEventArgs e)
         {
-            var form = new OrderRequestForm();
-            form.ShowDialog();
+            if (DataGridSearch.SelectedItem is SearchEntry selectedSearchEntry)
+            {
+                var form = new OrderRequestForm(selectedSearchEntry);
+                form.ShowDialog();
+            }
+
         }
 
     }
