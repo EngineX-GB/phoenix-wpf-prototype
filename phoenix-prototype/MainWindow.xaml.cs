@@ -13,6 +13,9 @@ using System.Net.Http;
 using System.Text.Json;
 using System.Diagnostics;
 using System.CodeDom;
+using Microsoft.Win32;
+using System.Security.Policy;
+using System.Windows.Interop;
 
 namespace phoenix_prototype
 {
@@ -59,15 +62,17 @@ namespace phoenix_prototype
             this.Width = workArea.Width; 
             this.Height = workArea.Height;
 
-            windowSearch = new search(DataService);
-            this.AttachedWindows.Add(windowSearch);
-            windowSearch.Owner = this;
-            windowSearch.Show();
+            //windowSearch = new search(DataService);
+            //this.AttachedWindows.Add(windowSearch);
+            //windowSearch.Owner = this;
+            //windowSearch.Show();
 
-            windowNotifications = new Notifications();
-            this.AttachedWindows.Add(windowNotifications);
-            windowNotifications.Owner = this;
-            windowNotifications.Show();
+
+            // TODO: 200626 - check if not showing notifications on startup will cause issues with the app 
+            //windowNotifications = new Notifications();
+            //this.AttachedWindows.Add(windowNotifications);
+            //windowNotifications.Owner = this;
+            //windowNotifications.Show();
 
         }
 
@@ -255,6 +260,191 @@ namespace phoenix_prototype
             var emailAccountDialog = new EmailAccountDialog();
             emailAccountDialog.Owner = this;
             emailAccountDialog.ShowDialog();
+        }
+
+
+        public void ImportLayoutDialog_Click(object sender, RoutedEventArgs e)
+        {
+            var importLayoutFileDialog = new OpenFileDialog
+            {
+                Title = "Import Layout",
+                Filter = "Json Files (*.json)|*.json",
+                DefaultExt = "json"
+            };
+
+            bool? result = importLayoutFileDialog.ShowDialog();
+            if (result == true )
+            {
+                string filePath = importLayoutFileDialog.FileName;
+                List<WindowMetadata> listOfWindowMetadata = ViewManager.ImportLayoutFromFile(filePath);
+                if (listOfWindowMetadata.Count == 0)
+                {
+                    MessageBox.Show("Unable to import the layout data", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                // clear out the existing windows in the view:
+
+                this.AttachedWindows.Clear();
+
+                // TODO: clear down all the windows (dispose of them)
+
+
+                // go through the windows metadata list and recreate the windows.
+
+                foreach (var winMetadata in listOfWindowMetadata)
+                {
+                    // load the window with the specified position and dimensions.
+                    addAttachedWindow(winMetadata);
+                }
+
+            }
+        }
+
+
+        private void addAttachedWindow(WindowMetadata windowMetadata)
+        {
+            if (windowMetadata.windowsName == "_Search")
+            {
+                if (windowSearch == null)
+                {
+                    windowSearch = new search(DataService);
+                    windowSearch.Owner = this;
+                }
+
+                if (windowSearch != null && windowSearch is search search)
+                {
+                    if (search.IsClosed)
+                    {
+                        windowSearch = new search(DataService);
+                        windowSearch.Owner = this;
+                    }
+                }
+                
+                windowSearch.Top = windowMetadata.top;
+                windowSearch.Left = windowMetadata.left;
+                windowSearch.Height = windowMetadata.height;
+                windowSearch.Width = windowMetadata.width;
+                this.AttachedWindows.Add(windowSearch);
+                windowSearch.Show();
+            }
+            if (windowMetadata.windowsName == "_Watchlist")
+            {
+                if (windowWatchlist == null)
+                {
+                    windowWatchlist = new Watchlist(DataService);
+                    windowWatchlist.Owner = this;
+                }
+
+                if (windowWatchlist != null && windowWatchlist is Watchlist watchlist)
+                {
+                    if (watchlist.IsClosed)
+                    {
+                        windowWatchlist = new Watchlist(DataService);
+                        windowWatchlist.Owner = this;
+                    }
+                }
+
+                windowWatchlist.Top = windowMetadata.top;
+                windowWatchlist.Left = windowMetadata.left;
+                windowWatchlist.Height = windowMetadata.height;
+                windowWatchlist.Width = windowMetadata.width;
+                this.AttachedWindows.Add(windowWatchlist);
+                windowWatchlist.Show();
+            }
+            if (windowMetadata.windowsName == "_Notifications")
+            {
+                if (windowNotifications == null)
+                {
+                    windowNotifications = new Notifications();
+                    windowNotifications.Owner = this;
+                }
+                if (windowNotifications != null && windowNotifications is Notifications notifications)
+                {
+                    if (notifications.IsClosed)
+                    {
+                        windowNotifications = new Notifications();
+                        windowNotifications.Owner = this;
+                    }
+                }
+                windowNotifications.Top = windowMetadata.top;
+                windowNotifications.Left = windowMetadata.left;
+                windowNotifications.Height = windowMetadata.height;
+                windowNotifications.Width = windowMetadata.width;
+                this.AttachedWindows.Add(windowNotifications);
+                windowNotifications.Show();
+            }
+            if (windowMetadata.windowsName == "_News")
+            {
+                if (windowNews == null) 
+                {
+                    windowNews = new Reports(DataService);
+                    windowNews.Owner = this;
+                }
+                if (windowNews != null && windowNews is Reports reports)
+                {
+                    if (reports.IsClosed)
+                    {
+                        windowNews = new Reports(DataService);
+                        windowNews.Owner = this;
+                    }
+                }
+
+                this.AttachedWindows.Add(windowNews);
+                windowNews.Top = windowMetadata.top;
+                windowNews.Left = windowMetadata.left;
+                windowNews.Height = windowMetadata.height;
+                windowNews.Width = windowMetadata.width;
+                windowNews.Show();
+            }
+            if (windowMetadata.windowsName == "_Orders")
+            {
+                if (windowOrders == null)
+                {
+                    windowOrders = new Orders(DataService);
+                    windowOrders.Owner = this;
+                }
+                if (windowOrders != null && windowOrders is Orders orders)
+                {
+                    if (orders.IsClosed)
+                    {
+                        windowOrders = new Orders(DataService);
+                        windowOrders.Owner = this;
+                    }
+                }
+
+                this.AttachedWindows.Add(windowOrders);
+                windowOrders.Top = windowMetadata.top;
+                windowOrders.Left = windowMetadata.left;
+                windowOrders.Height = windowMetadata.height;
+                windowOrders.Width = windowMetadata.width;
+                windowOrders.Show();
+            }
+
+        }
+
+
+
+        public void ExportLayoutDialog_Click(object sender, RoutedEventArgs e)
+        {
+            var exportLayoutFileDialog = new SaveFileDialog
+            {
+                Title = "Export Layout File",
+                Filter = "Json Files (*.json)|*.json",
+                DefaultExt = "json",
+                FileName = "CustomLayout"
+            };
+
+            bool? result = exportLayoutFileDialog.ShowDialog();
+
+            if (result == true)
+            {
+                string filePath = exportLayoutFileDialog.FileName;
+
+                bool exporResult = ViewManager.ExportLayoutToFile(AttachedWindows, filePath);
+                if (!exporResult) {
+                    MessageBox.Show("An error occurred when trying to export the layoout", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
         }
 
         // button to toggle the ingestion service pinging

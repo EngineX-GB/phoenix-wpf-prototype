@@ -152,6 +152,13 @@ namespace phoenix_prototype
             response.EnsureSuccessStatusCode();
         }
 
+        public bool IsClosed { get; private set; }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            IsClosed = true;
+            base.OnClosed(e);
+        }
 
 
     }

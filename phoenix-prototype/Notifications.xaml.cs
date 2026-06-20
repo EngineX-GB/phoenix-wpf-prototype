@@ -87,5 +87,13 @@ namespace phoenix_prototype
 
         private void PauseNotifications_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
+        public bool IsClosed { get; private set; }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            IsClosed = true;
+            base.OnClosed(e);
+        }
+
     }
 }

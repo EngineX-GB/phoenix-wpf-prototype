@@ -160,5 +160,16 @@ namespace phoenix_prototype
                 _data.ServiceReportHeadlineEntries.Add(item);
         }
 
+
+        public bool IsClosed { get; private set; }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            IsClosed = true;
+            base.OnClosed(e);
+        }
+
     }
+
+
 }

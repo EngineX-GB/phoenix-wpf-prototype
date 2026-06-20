@@ -213,8 +213,8 @@
                 <MenuItem Header="Notifications" Click="Notifications_Click" />
                 <Separator />
                 <MenuItem Header="Save Current Layout" />
-                <MenuItem Header="Load Saved Layout" />
-                <MenuItem Header="Export Existing Layout" />
+                <MenuItem Header="Import Layout" Click="ImportLayoutDialog_Click" />
+                <MenuItem Header="Export Layout" Click="ExportLayoutDialog_Click"/>
             </MenuItem>
 
             <MenuItem Header="Help"/>

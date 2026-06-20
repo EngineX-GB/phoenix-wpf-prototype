@@ -52,6 +52,14 @@ namespace phoenix_prototype
             _data.WatchlistUpdated += LoadWatchlistAsync; // subscribe for user adding a user to watchlist from search window
         }
 
+        public bool IsClosed { get; private set; }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            IsClosed = true;
+            base.OnClosed(e);
+        }
+
         public async Task LoadWatchlistAsync()
         {
             using var client = new HttpClient();

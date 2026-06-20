@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -42,13 +44,42 @@ namespace phoenix_prototype
 
             //TODO: Save the list (json format) on a file
 
-            return false;
+            try
+            {
+                var options = new JsonSerializerOptions
+                {
+                    WriteIndented = true
+                };
+
+                var json = JsonSerializer.Serialize(windowMetadataList, options);
+                File.WriteAllText(filePath, json);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
         }
 
 
         public static List<WindowMetadata> ImportLayoutFromFile(string filePath)
         {
-            return null;
+            try
+            {
+                string json = File.ReadAllText(filePath);
+                List<WindowMetadata> listOfWindowMetadata = JsonSerializer.Deserialize<List<WindowMetadata>>(json);
+                if (listOfWindowMetadata != null && listOfWindowMetadata.Count > 0)
+                {
+                    return listOfWindowMetadata;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return new();
+            }
+            return new();
         }
 
     }
