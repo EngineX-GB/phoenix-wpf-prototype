@@ -1,21 +1,22 @@
-﻿using System.Collections.ObjectModel;
+﻿using Microsoft.Win32;
+using System.CodeDom;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Net.Http;
+using System.Security.Policy;
 using System.Text;
+using System.Text.Json;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Net.Http;
-using System.Text.Json;
-using System.Diagnostics;
-using System.CodeDom;
-using Microsoft.Win32;
-using System.Security.Policy;
-using System.Windows.Interop;
+using System.Windows.Shell;
 
 namespace phoenix_prototype
 {
@@ -35,6 +36,8 @@ namespace phoenix_prototype
         private Point _dragOffset; // not used
         private Dictionary<string, Point> offsetPointDict = new Dictionary<string, Point>();
         public List<Window> AttachedWindows = new();
+
+        private Rect _restoreBounds;
 
 
 
@@ -233,6 +236,21 @@ namespace phoenix_prototype
         private void MinimiseButton_Click(object sender, RoutedEventArgs e)
         {
             this.WindowState = WindowState.Minimized;
+        }
+
+
+        private void MaximiseButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Save restore bounds
+            _restoreBounds = new Rect(Left, Top, Width, Height);
+
+            var wa = SystemParameters.WorkArea;
+
+            WindowState = WindowState.Normal; // important
+            Left = wa.Left;
+            Top = wa.Top;
+            Width = wa.Width;
+            Height = wa.Height;
         }
 
 
@@ -459,7 +477,6 @@ namespace phoenix_prototype
             var response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
         }
-
 
     }
 }
