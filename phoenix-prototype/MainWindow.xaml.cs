@@ -28,6 +28,12 @@ namespace phoenix_prototype
         private Window windowSearch;
         private Notifications windowNotifications;
 
+        private bool _isDraggingTitleBar = false;
+        private Point _dragOffset; // not used
+        private Dictionary<string, Point> offsetPointDict = new Dictionary<string, Point>();
+        public List<Window> AttachedWindows = new();
+
+
 
         private readonly MainViewModel _vm;
 
@@ -39,6 +45,7 @@ namespace phoenix_prototype
             _vm = new MainViewModel(this);
             DataContext = _vm;
 
+            this.LocationChanged += MainWindow_LocationChanged;
 
             Debug.WriteLine("MainWindow DataContext set to MainViewModel");
             Loaded += async (_, __) => await _vm.InitializeAsync();
@@ -53,10 +60,12 @@ namespace phoenix_prototype
             this.Height = workArea.Height;
 
             windowSearch = new search(DataService);
+            this.AttachedWindows.Add(windowSearch);
             windowSearch.Owner = this;
             windowSearch.Show();
 
             windowNotifications = new Notifications();
+            this.AttachedWindows.Add(windowNotifications);
             windowNotifications.Owner = this;
             windowNotifications.Show();
 
@@ -128,18 +137,66 @@ namespace phoenix_prototype
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
-        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e) {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+
+                // create a dictionary containing the window names and the offsets
+
+
+
+                // Capture relative offsets for each attached window
+                foreach (var win in AttachedWindows)
+                {
+                    Debug.WriteLine("[win] " + win.Name + "left : " + win.Left + ", top : " + win.Top);
+                    var dragOffset = new Point(win.Left - this.Left, win.Top - this.Top);
+                    offsetPointDict[win.Name] = dragOffset;
+                }
+
+
+                _isDraggingTitleBar = true;
+
+                try
+                {
+                    DragMove();   // This blocks until the drag ends
+                }
+                finally
+                {
+                    _isDraggingTitleBar = false;
+                }
+            }
+        }
+
+
+        private void MainWindow_LocationChanged(object sender, EventArgs e)
+        {
+            if (!_isDraggingTitleBar)
+                return;
+
+            foreach (var win in AttachedWindows)
+            {
+                win.Left = this.Left + offsetPointDict[win.Name].X;
+               win.Top = this.Top + offsetPointDict[win.Name].Y;
+                Debug.WriteLine(win.Name + ", " + win.Left + ", "+win.Top );
+                Debug.WriteLine("Main window : " + this.Left + ", " + this.Top);
+            }
+        }
+
+
+
 
         private void Watchlist_Click(object sender, RoutedEventArgs e)
         {
             windowWatchlist = new Watchlist(DataService);   // Watchlist.xaml → class Watchlist
             windowWatchlist.Owner = this;            // Optional: keeps it tied to main window
+            this.AttachedWindows.Add(windowWatchlist);
             windowWatchlist.Show();                  // or ShowDialog() if you want modal
         }
 
         private void Notifications_Click(object sender, RoutedEventArgs e)
         {
             windowNotifications = new Notifications();
+            this.AttachedWindows.Add(windowNotifications);
             windowNotifications.Owner = this;
             windowNotifications.Show();
         }
@@ -147,6 +204,7 @@ namespace phoenix_prototype
         private void Orders_Click(object sender, RoutedEventArgs e)
         {
             windowOrders = new Orders(DataService);
+            this.AttachedWindows.Add(windowOrders);
             windowOrders.Owner = this;
             windowOrders.Show();
         }
@@ -154,6 +212,7 @@ namespace phoenix_prototype
         private void News_Click(object sender, RoutedEventArgs e)
         {
             windowNews = new Reports(DataService);
+            this.AttachedWindows.Add(windowNews);
             windowNews.Owner = this;
             windowNews.Show();
         }

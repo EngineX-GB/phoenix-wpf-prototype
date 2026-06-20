@@ -10,7 +10,8 @@
         Title="Orders"
         ShowInTaskbar="False"
         Loaded="Window_Loaded"
-        ResizeMode="CanResize">
+        ResizeMode="CanResize"
+        Name="_Orders">
 
     <DockPanel>
 

@@ -9,7 +9,8 @@
         WindowStyle="None"
         Title="Notifications"
         ShowInTaskbar="False"
-        ResizeMode="CanResize">
+        ResizeMode="CanResize"
+        Name="_Notifications">
 
     <DockPanel>
 
