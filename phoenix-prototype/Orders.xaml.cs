@@ -45,6 +45,8 @@ namespace phoenix_prototype
         }
         //public ObservableCollection<OrderEntry> OrderEntries { get; set; } = new ObservableCollection<OrderEntry>();
 
+
+        private WindowConfig windowConfig { get; set; } = new WindowConfig();
         public Orders(AppDataService data)
         {
             InitializeComponent();
@@ -91,7 +93,14 @@ namespace phoenix_prototype
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
-        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e) {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                if (!windowConfig._lockEnabled)
+                    this.DragMove();
+
+            }
+        }
 
         private async void RefreshButton_Click(object sender, RoutedEventArgs e) { await LoadAllOrdersAsync(); }
 
@@ -158,6 +167,25 @@ namespace phoenix_prototype
         {
             IsClosed = true;
             base.OnClosed(e);
+        }
+
+
+        private void LockButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (windowConfig != null)
+            {
+                if (windowConfig._lockEnabled)
+                {
+                    // if it's already locked, then unlock it:
+                    this.ResizeMode = ResizeMode.CanResize;
+                    windowConfig._lockEnabled = false;
+                }
+                else
+                {
+                    this.ResizeMode = ResizeMode.NoResize;
+                    windowConfig._lockEnabled = true;
+                }
+            }
         }
 
 

@@ -41,6 +41,9 @@ namespace phoenix_prototype
             int borderColor = unchecked((int)0xFF1A1A1A); // match your window background
             DwmSetWindowAttribute(hwnd, DWMWA_BORDER_COLOR, ref borderColor, sizeof(int));
         }
+
+        private WindowConfig windowConfig { get; set; } = new WindowConfig();
+
         public Reports(AppDataService data)
         {
             InitializeComponent();
@@ -67,7 +70,15 @@ namespace phoenix_prototype
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
-        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                if (!windowConfig._lockEnabled)
+                    this.DragMove();
+
+            }
+        }
 
         /* Program the search button*/
         private async void SearchButton_Click(object sender, RoutedEventArgs e) { 
@@ -167,6 +178,25 @@ namespace phoenix_prototype
         {
             IsClosed = true;
             base.OnClosed(e);
+        }
+
+
+        private void LockButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (windowConfig != null)
+            {
+                if (windowConfig._lockEnabled)
+                {
+                    // if it's already locked, then unlock it:
+                    this.ResizeMode = ResizeMode.CanResize;
+                    windowConfig._lockEnabled = false;
+                }
+                else
+                {
+                    this.ResizeMode = ResizeMode.NoResize;
+                    windowConfig._lockEnabled = true;
+                }
+            }
         }
 
     }

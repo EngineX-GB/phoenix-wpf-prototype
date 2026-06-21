@@ -34,6 +34,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
                 <!-- Title -->
@@ -43,8 +44,23 @@
                            Foreground="White"
                            FontSize="10"/>
 
-                <!-- Close Button -->
+                <!-- Lock Button -->
                 <Button Grid.Column="1"
+                        Content="🔒"
+                        Width="40"
+                        Background="Black"
+                        Foreground="White"
+                        BorderBrush="Transparent"
+
+                        FontSize="7"
+                        Click="LockButton_Click"
+                        Padding="0"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        />
+
+                <!-- Close Button -->
+                <Button Grid.Column="2"
                         Content="⨯"
                         Width="40"
                         Background="Black"

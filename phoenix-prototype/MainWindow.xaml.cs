@@ -39,8 +39,9 @@ namespace phoenix_prototype
 
         private Rect _restoreBounds;
 
+        private bool _lockAttachedWindows;
 
-
+       
         private readonly MainViewModel _vm;
 
         public AppDataService DataService { get; } = new();

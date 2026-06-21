@@ -24,6 +24,7 @@ namespace phoenix_prototype
     /// </summary>
     public partial class search : Window
     {
+        private WindowConfig windowConfig { get; set; } = new WindowConfig();
 
         private readonly AppDataService _data;
 
@@ -157,7 +158,15 @@ namespace phoenix_prototype
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
-        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e) { if (e.ChangedButton == MouseButton.Left) this.DragMove(); }
+        private void TitleBar_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                if (!windowConfig._lockEnabled)
+                    this.DragMove();
+
+            }
+        }
 
         /* Program the refresh button*/
         private async void RunSearchQuery_Click(object sender, RoutedEventArgs e) {
@@ -233,6 +242,24 @@ namespace phoenix_prototype
         {
             IsClosed = true;
             base.OnClosed(e);
+        }
+
+        private void LockButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (windowConfig != null)
+            {
+                if (windowConfig._lockEnabled)
+                {
+                    // if it's already locked, then unlock it:
+                    this.ResizeMode = ResizeMode.CanResize;
+                    windowConfig._lockEnabled = false;
+                }
+                else
+                {
+                    this.ResizeMode = ResizeMode.NoResize;
+                    windowConfig._lockEnabled = true;
+                }
+            }
         }
 
     }
