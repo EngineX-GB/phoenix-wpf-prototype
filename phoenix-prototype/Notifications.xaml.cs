@@ -81,6 +81,11 @@ namespace phoenix_prototype
 
         private void CloseButton_Click(object sender, RoutedEventArgs e) { this.Close(); }
 
+        private void LockButton_Click(object sender, RoutedEventArgs e)
+        {
+            //TODO: implement
+        }
+
         private void ClearNotifications_Click(object sender, RoutedEventArgs e) {
             NotificationListEntries.Clear();
         }

@@ -251,6 +251,15 @@ namespace phoenix_prototype
             Top = wa.Top;
             Width = wa.Width;
             Height = wa.Height;
+
+
+            foreach (var win in AttachedWindows)
+            {
+                win.Left = this.Left + offsetPointDict[win.Name].X;
+                win.Top = this.Top + offsetPointDict[win.Name].Y;
+                Debug.WriteLine(win.Name + ", " + win.Left + ", " + win.Top);
+                Debug.WriteLine("Main window : " + this.Left + ", " + this.Top);
+            }
         }
 
 
@@ -477,6 +486,54 @@ namespace phoenix_prototype
             var response = await client.GetAsync(url);
             response.EnsureSuccessStatusCode();
         }
+
+        
+        // for double clicking on the custom titlebar and maximing the window
+        private void TitleBar_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                var window = Window.GetWindow((DependencyObject)sender);
+
+
+                if (window.WindowState == WindowState.Normal)
+                {
+                    CustomMaximisedWindow();
+                }
+                else
+                {
+                    window.WindowState = WindowState.Normal;
+                }
+            }
+        }
+
+        /**
+         * This is a function to work around maximising the window to use the full work area (not including the task bar)
+         * rather than using WindowState.MAXIMIZED which leaves a gap on the bottom and right side of the window.
+         */
+        private void CustomMaximisedWindow()
+        {
+            // Save restore bounds
+            _restoreBounds = new Rect(Left, Top, Width, Height);
+
+            var wa = SystemParameters.WorkArea;
+
+            WindowState = WindowState.Normal; // important
+            Left = wa.Left;
+            Top = wa.Top;
+            Width = wa.Width;
+            Height = wa.Height;
+
+
+            foreach (var win in AttachedWindows)
+            {
+                win.Left = this.Left + offsetPointDict[win.Name].X;
+                win.Top = this.Top + offsetPointDict[win.Name].Y;
+                Debug.WriteLine(win.Name + ", " + win.Left + ", " + win.Top);
+                Debug.WriteLine("Main window : " + this.Left + ", " + this.Top);
+            }
+        }
+
 
     }
 }

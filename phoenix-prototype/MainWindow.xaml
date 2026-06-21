@@ -132,7 +132,8 @@
         <Border DockPanel.Dock="Top"
                 Background="#333"
                 Height="25"
-                MouseDown="TitleBar_MouseDown">
+                MouseDown="TitleBar_MouseDown"
+                MouseLeftButtonDown="TitleBar_MouseDoubleClick">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
