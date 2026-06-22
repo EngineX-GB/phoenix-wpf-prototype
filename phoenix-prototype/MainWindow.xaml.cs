@@ -535,6 +535,11 @@ namespace phoenix_prototype
             }
         }
 
+        private void LoadDefaultLayout()
+        {
+
+        }
+
 
     }
 }
