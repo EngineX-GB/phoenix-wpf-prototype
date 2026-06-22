@@ -66,17 +66,6 @@ namespace phoenix_prototype
             this.Width = workArea.Width; 
             this.Height = workArea.Height;
 
-            //windowSearch = new search(DataService);
-            //this.AttachedWindows.Add(windowSearch);
-            //windowSearch.Owner = this;
-            //windowSearch.Show();
-
-
-            // TODO: 200626 - check if not showing notifications on startup will cause issues with the app 
-            //windowNotifications = new Notifications();
-            //this.AttachedWindows.Add(windowNotifications);
-            //windowNotifications.Owner = this;
-            //windowNotifications.Show();
 
         }
 
@@ -535,9 +524,22 @@ namespace phoenix_prototype
             }
         }
 
+        private void LoadDefaultLayout_Click(object sender, RoutedEventArgs e)
+        {
+            LoadDefaultLayout();
+        }
+
         private void LoadDefaultLayout()
         {
-
+            this.AttachedWindows.Clear();
+            List<WindowMetadata> defaultWindowMetadata = ViewManager.PrepareDefaultLayout();
+            if (defaultWindowMetadata.Count > 0 )
+            {
+                foreach (var win in defaultWindowMetadata)
+                {
+                    addAttachedWindow(win);
+                }
+            }
         }
 
 

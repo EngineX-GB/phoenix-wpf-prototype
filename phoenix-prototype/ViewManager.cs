@@ -31,6 +31,18 @@ namespace phoenix_prototype
     internal class ViewManager
     {
 
+        public static List<WindowMetadata> PrepareDefaultLayout()
+        {
+            List<WindowMetadata> windowMetadataList = new();
+            windowMetadataList.Add(new WindowMetadata("_Watchlist", 76, -0.8, 425.6, 396));
+            windowMetadataList.Add(new WindowMetadata("_Orders", 498.40000000000003, 0, 326.40000000000003, 397.6));
+            windowMetadataList.Add(new WindowMetadata("_Notifications", 72.8, 1180, 753.6, 358.40000000000003));
+            windowMetadataList.Add(new WindowMetadata("_Search", 73.60000000000001, 388.8, 450.40000000000003, 802.4000000000001));
+            windowMetadataList.Add(new WindowMetadata("_News", 522.4, 389.6, 304, 800));
+
+            return windowMetadataList;
+        }
+
         public static bool ExportLayoutToFile(List<Window> windowsList, string filePath)
         {
             List<WindowMetadata> windowMetadataList = new();

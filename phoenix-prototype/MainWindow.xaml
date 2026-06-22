@@ -10,9 +10,9 @@
         mc:Ignorable="d"
         Background="Black"
         WindowStyle="None"
-        ResizeMode="CanResize"
+        ResizeMode="NoResize"
 
-        Title="Phoenix Client Platform"
+        Title="Phoenix Execution Platform"
         ShowInTaskbar="True"
         Loaded="Window_Loaded"
         MaxHeight="{Binding Source={x:Static SystemParameters.WorkArea}, Path=Height}"
@@ -148,7 +148,7 @@
 
 
                 <!-- Title -->
-                <TextBlock Text="Phoenix Client Platform"
+                <TextBlock Text="Phoenix Execution Platform"
                            VerticalAlignment="Center"
                            Margin="5,0,0,0"
                            Foreground="White"
@@ -228,7 +228,7 @@
                 <MenuItem Header="News" Click="News_Click" />
                 <MenuItem Header="Notifications" Click="Notifications_Click" />
                 <Separator />
-                <MenuItem Header="Save Current Layout" />
+                <MenuItem Header="Load Default Layout" Click="LoadDefaultLayout_Click" />
                 <MenuItem Header="Import Layout" Click="ImportLayoutDialog_Click" />
                 <MenuItem Header="Export Layout" Click="ExportLayoutDialog_Click"/>
             </MenuItem>
